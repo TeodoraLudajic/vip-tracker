@@ -273,7 +273,7 @@ def get_monthly(uid):
     return pd.read_sql(
         """
         SELECT
-        id,
+        ID,
         month AS Month,
         deposit AS Deposit,
         segment AS Segment,
