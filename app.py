@@ -390,7 +390,7 @@ if menu == "📥 Upload Month":
                 for _, row in df.iterrows():
 
                     uid = str(
-                        row["customer_id"]
+                        int(row["customer_id"])
                     )
 
 
