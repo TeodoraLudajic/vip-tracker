@@ -649,7 +649,7 @@ if menu == "🔍 Player":
                     hide_index=True,
                     use_container_width=True,
                     height=200,
-                    disabled=["id", "Month", "Segment", "Status"],
+                    disabled=["id", "Month", "Segment"],
                     column_config={
                         "id": None
                     }
