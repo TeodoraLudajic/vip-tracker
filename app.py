@@ -6,8 +6,9 @@ import sqlite3
 conn = sqlite3.connect('vip_podaci.db')
 c = conn.cursor()
 
-# Kreiramo tabelu
-c.execute('''CREATE TABLE IF NOT EXISTS baza_igraca 
+# NUKLEARNA METODA: Obriši staru tabelu ako postoji da bi nova struktura sigurno radila
+c.execute("DROP TABLE IF EXISTS baza_igraca")
+c.execute('''CREATE TABLE baza_igraca 
              (uid TEXT, mesec TEXT, iznos REAL, brand TEXT, segment TEXT, closure TEXT, zadovoljan TEXT, voli TEXT, napomena TEXT)''')
 conn.commit()
 
@@ -22,12 +23,12 @@ if uploaded_file:
     
     if st.button("Učitaj i ažuriraj bazu") and mesec_input:
         for index, row in df.iterrows():
-            # Ovde smo promenili 'segment' u 'vips' da odgovara tvom fajlu
             uid = str(row['customer_id'])
             iznos = row['bins']
             brand = row['brand']
             segment = row['vips'] 
             
+            # Upisujemo u bazu
             c.execute("INSERT INTO baza_igraca (uid, mesec, iznos, brand, segment) VALUES (?,?,?,?,?)", 
                       (uid, mesec_input, iznos, brand, segment))
         conn.commit()
@@ -35,7 +36,6 @@ if uploaded_file:
 
 st.divider()
 
-# Pretraga
 uid_search = st.text_input("Ukucaj UID igrača:")
 if uid_search:
     istorija = pd.read_sql(f"SELECT * FROM baza_igraca WHERE uid='{uid_search}'", conn)
