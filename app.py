@@ -642,16 +642,39 @@ if menu == "🔍 Player":
 
             history = get_monthly(uid)
 
-
             if not history.empty:
 
-                st.dataframe(
+                edited_history = st.data_editor(
                     history,
                     hide_index=True,
                     use_container_width=True,
-                    height=220
+                    height=220,
+                    disabled=["id", "Month", "Segment", "Status"]
                 )
 
+                if st.button("💾 Save Monthly Changes"):
+
+                    for _, row in edited_history.iterrows():
+
+                        cur.execute(
+                            """
+                            UPDATE monthly
+                            SET deposit=?
+                            WHERE id=?
+                            """,
+                            (
+                                row["Deposit"],
+                                row["id"]
+                            )
+                        )
+
+                    conn.commit()
+
+                    st.success("Monthly history updated.")
+
+                    st.rerun()
+
+           
             else:
 
                 st.caption(
