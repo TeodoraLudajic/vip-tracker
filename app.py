@@ -306,7 +306,7 @@ def get_promo(uid):
 
 
 
-st.sidebar.title("🎰 VIP BO")
+st.sidebar.title("👑 VIP BO")
 
 
 menu = st.sidebar.radio(
