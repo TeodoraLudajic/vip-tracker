@@ -2,205 +2,342 @@ import streamlit as st
 import pandas as pd
 import sqlite3
 
+
+# ==========================
+# CONFIG
+# ==========================
+
 st.set_page_config(
     page_title="VIP BO",
     page_icon="🎰",
     layout="wide"
 )
 
+
 DB = "vip_podaci.db"
 
 
-def connection():
-    return sqlite3.connect(DB, check_same_thread=False)
+# ==========================
+# DATABASE
+# ==========================
 
+conn = sqlite3.connect(
+    DB,
+    check_same_thread=False
+)
 
-conn = connection()
 cur = conn.cursor()
 
 
-# =========================
-# DATABASE
-# =========================
+def setup_db():
 
-cur.execute("""
-CREATE TABLE IF NOT EXISTS players (
-    uid TEXT PRIMARY KEY,
-    brand TEXT,
-    closure TEXT DEFAULT '',
-    reward TEXT DEFAULT '',
-    tags TEXT DEFAULT '',
-    notes TEXT DEFAULT ''
-)
-""")
+    cur.execute("""
+    CREATE TABLE IF NOT EXISTS players (
+        uid TEXT PRIMARY KEY,
+        brand TEXT,
+        closure TEXT DEFAULT '',
+        reward TEXT DEFAULT '',
+        tags TEXT DEFAULT '',
+        notes TEXT DEFAULT ''
+    )
+    """)
 
 
-cur.execute("""
-CREATE TABLE IF NOT EXISTS monthly (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    uid TEXT,
-    month TEXT,
-    deposit TEXT,
-    segment TEXT,
-    status TEXT,
-    notes TEXT DEFAULT ''
-)
-""")
+    cur.execute("""
+    CREATE TABLE IF NOT EXISTS monthly (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        uid TEXT,
+        month TEXT,
+        deposit TEXT,
+        segment TEXT,
+        status TEXT,
+        notes TEXT DEFAULT ''
+    )
+    """)
 
 
-cur.execute("""
-CREATE TABLE IF NOT EXISTS promo (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    uid TEXT,
-    month TEXT,
-    promo_type TEXT,
-    amount TEXT,
-    notes TEXT DEFAULT ''
-)
-""")
+    cur.execute("""
+    CREATE TABLE IF NOT EXISTS promo (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        uid TEXT,
+        month TEXT,
+        promo_type TEXT,
+        amount TEXT,
+        notes TEXT DEFAULT ''
+    )
+    """)
 
 
-conn.commit()
+    conn.commit()
 
 
-# =========================
+setup_db()
+
+
+
+# ==========================
 # STYLE
-# =========================
+# ==========================
 
 st.markdown("""
 <style>
 
-body {
-background-color:#0e1117;
+.main .block-container {
+    padding-top: 1rem;
+    padding-left: 2rem;
+    padding-right: 2rem;
 }
 
-.card {
-background:#1b1f24;
-padding:20px;
-border-radius:15px;
-border:1px solid #333;
-margin-bottom:15px;
+
+.vip-card {
+
+    background-color:#181818;
+
+    padding:14px;
+
+    border-radius:12px;
+
+    border:1px solid #333;
+
+    margin-bottom:10px;
+
 }
+
+
+.small-title {
+
+    font-size:18px;
+
+    font-weight:600;
+
+    margin-bottom:8px;
+
+}
+
 
 .badge {
-display:inline-block;
-background:#333;
-padding:6px 12px;
-border-radius:20px;
-margin:3px;
+
+    display:inline-block;
+
+    background:#303030;
+
+    padding:4px 10px;
+
+    border-radius:15px;
+
+    margin:2px;
+
+    font-size:13px;
+
 }
+
+
+div[data-testid="stDataFrame"] {
+
+    height:auto;
+
+}
+
 
 </style>
 """, unsafe_allow_html=True)
 
 
 
-# =========================
+# ==========================
 # FUNCTIONS
-# =========================
+# ==========================
+
 
 def get_player(uid):
 
     return pd.read_sql(
-        "SELECT * FROM players WHERE uid=?",
+        """
+        SELECT *
+        FROM players
+        WHERE uid=?
+        """,
         conn,
         params=(uid,)
     )
 
 
-def save_player(uid, brand, closure, reward, tags, notes):
 
-    cur.execute("""
-    INSERT OR REPLACE INTO players
-    (uid,brand,closure,reward,tags,notes)
-    VALUES (?,?,?,?,?,?)
-    """,
-    (
+def save_player(
         uid,
         brand,
         closure,
         reward,
         tags,
         notes
-    ))
+):
+
+    cur.execute(
+        """
+        INSERT OR REPLACE INTO players
+        (
+        uid,
+        brand,
+        closure,
+        reward,
+        tags,
+        notes
+        )
+        VALUES (?,?,?,?,?,?)
+        """,
+        (
+            uid,
+            brand,
+            closure,
+            reward,
+            tags,
+            notes
+        )
+    )
 
     conn.commit()
 
 
 
-def add_month(uid, month, deposit, segment, status):
+def add_month(
+        uid,
+        month,
+        deposit,
+        segment,
+        status
+):
 
-    cur.execute("""
-    SELECT id FROM monthly
-    WHERE uid=? AND month=?
-    """,
-    (uid, month))
+    cur.execute(
+        """
+        SELECT id
+        FROM monthly
+        WHERE uid=? AND month=?
+        """,
+        (
+            uid,
+            month
+        )
+    )
 
 
     if cur.fetchone():
 
-        cur.execute("""
-        UPDATE monthly
-        SET deposit=?,
-            segment=?,
-            status=?
-        WHERE uid=? AND month=?
-        """,
-        (
-            deposit,
-            segment,
-            status,
-            uid,
-            month
-        ))
+        cur.execute(
+            """
+            UPDATE monthly
+            SET deposit=?,
+                segment=?,
+                status=?
+            WHERE uid=? AND month=?
+            """,
+            (
+                deposit,
+                segment,
+                status,
+                uid,
+                month
+            )
+        )
+
 
     else:
 
-        cur.execute("""
-        INSERT INTO monthly
-        (uid,month,deposit,segment,status)
-        VALUES (?,?,?,?,?)
-        """,
-        (
+        cur.execute(
+            """
+            INSERT INTO monthly
+            (
             uid,
             month,
             deposit,
             segment,
             status
-        ))
+            )
+            VALUES (?,?,?,?,?)
+            """,
+            (
+                uid,
+                month,
+                deposit,
+                segment,
+                status
+            )
+        )
+
 
     conn.commit()
 
 
 
-st.title("🎰 VIP Back Office")
+def get_monthly(uid):
+
+    return pd.read_sql(
+        """
+        SELECT
+        month AS Month,
+        deposit AS Deposit,
+        segment AS Segment,
+        status AS Status
+        FROM monthly
+        WHERE uid=?
+        ORDER BY id
+        """,
+        conn,
+        params=(uid,)
+    )
+
+
+
+def get_promo(uid):
+
+    return pd.read_sql(
+        """
+        SELECT
+        month AS Month,
+        promo_type AS Promo,
+        amount AS Amount,
+        notes AS Notes
+        FROM promo
+        WHERE uid=?
+        ORDER BY id
+        """,
+        conn,
+        params=(uid,)
+    )
+
+
+
+st.sidebar.title("🎰 VIP BO")
+
 
 menu = st.sidebar.radio(
-    "Menu",
+    "",
     [
         "🔍 Player",
         "📥 Upload Month",
         "🎁 Promo"
     ]
 )
-# =========================
-# UPLOAD MONTHLY BII REPORT
-# =========================
+
+
+st.title("🎰 VIP Back Office")
+# ==========================
+# UPLOAD MONTH
+# ==========================
 
 if menu == "📥 Upload Month":
 
-    st.header("📥 Upload BII Monthly Report")
+    st.subheader("📥 Upload BII Monthly Report")
 
 
     month = st.text_input(
         "Mesec",
-        placeholder="npr. June 2026"
+        placeholder="June 2026"
     )
 
 
     file = st.file_uploader(
-        "Upload CSV",
-        type=["csv"]
+        "CSV fajl",
+        type="csv"
     )
 
 
@@ -208,17 +345,22 @@ if menu == "📥 Upload Month":
 
         df = pd.read_csv(file)
 
-        st.write("Preview:")
-        st.dataframe(
-            df.head(),
-            use_container_width=True
-        )
+
+        with st.expander("Preview fajla"):
+
+            st.dataframe(
+                df.head(10),
+                use_container_width=True,
+                height=250
+            )
 
 
-        if st.button("Import Month"):
+        if st.button(
+            "⬆️ Import Month"
+        ):
 
 
-            required = [
+            needed = [
                 "customer_id",
                 "brand",
                 "NextMonthBin",
@@ -228,7 +370,7 @@ if menu == "📥 Upload Month":
 
 
             missing = [
-                x for x in required
+                x for x in needed
                 if x not in df.columns
             ]
 
@@ -242,17 +384,20 @@ if menu == "📥 Upload Month":
 
             else:
 
-                added = 0
+                count = 0
 
 
                 for _, row in df.iterrows():
 
-                    uid = str(row["customer_id"])
+                    uid = str(
+                        row["customer_id"]
+                    )
 
 
                     cur.execute(
                         """
-                        SELECT uid FROM players
+                        SELECT uid
+                        FROM players
                         WHERE uid=?
                         """,
                         (uid,)
@@ -267,7 +412,10 @@ if menu == "📥 Upload Month":
                         cur.execute(
                             """
                             INSERT INTO players
-                            (uid,brand)
+                            (
+                            uid,
+                            brand
+                            )
                             VALUES (?,?)
                             """,
                             (
@@ -286,30 +434,34 @@ if menu == "📥 Upload Month":
                     )
 
 
-                    added += 1
+                    count += 1
 
 
                 conn.commit()
 
 
                 st.success(
-                    f"Ubačeno {added} igrača za {month}"
+                    f"Uspešno dodato: {count} igrača"
                 )
 
 
 
-# =========================
-# PLAYER PROFILE
-# =========================
+
+# ==========================
+# PLAYER PAGE
+# ==========================
 
 if menu == "🔍 Player":
 
 
-    st.header("🔍 Player Search")
+    st.subheader(
+        "🔍 Search Player"
+    )
 
 
     uid = st.text_input(
-        "UID"
+        "UID",
+        placeholder="Unesi UID"
     )
 
 
@@ -322,55 +474,181 @@ if menu == "🔍 Player":
         if player.empty:
 
             st.warning(
-                "Nema igrača sa tim UID"
+                "Igrač nije pronađen"
             )
 
 
         else:
 
+
             p = player.iloc[0]
 
 
+
+            # -------------------
+            # PLAYER CARD
+            # -------------------
+
             st.markdown(
-                f"""
-                <div class="card">
-
-                <h2>👤 {p['uid']}</h2>
-
-                <b>Brand:</b> {p['brand']}<br><br>
-
-                <b>Closure:</b> {p['closure'] or "-"}<br><br>
-
-                <b>Reward:</b> {p['reward'] or "-"}<br><br>
-
-                <b>Tags:</b><br>
-                {p['tags'] or "-"}
-
+                """
+                <div class="small-title">
+                👤 Player Info
                 </div>
                 """,
                 unsafe_allow_html=True
             )
 
 
-            st.subheader(
-                "📝 Notes"
-            )
-
-            st.info(
-                p["notes"]
-                if p["notes"]
-                else "-"
+            c1, c2, c3 = st.columns(
+                [1,1,2]
             )
 
 
+            with c1:
 
-            st.divider()
+                st.markdown(
+                    f"""
+                    <div class="vip-card">
+
+                    <b>UID</b><br>
+                    {p['uid']}
+
+                    </div>
+                    """,
+                    unsafe_allow_html=True
+                )
 
 
-            st.subheader(
-                "✏️ Edit Player"
+            with c2:
+
+                st.markdown(
+                    f"""
+                    <div class="vip-card">
+
+                    <b>Brand</b><br>
+                    {p['brand']}
+
+                    </div>
+                    """,
+                    unsafe_allow_html=True
+                )
+
+
+            with c3:
+
+                tags = (
+                    p["tags"]
+                    if p["tags"]
+                    else "-"
+                )
+
+
+                st.markdown(
+                    f"""
+                    <div class="vip-card">
+
+                    <b>Tags</b><br>
+
+                    {tags}
+
+                    </div>
+                    """,
+                    unsafe_allow_html=True
+                )
+
+
+
+            # -------------------
+            # MONTHLY HISTORY FIRST
+            # -------------------
+
+            st.markdown(
+                """
+                <div class="small-title">
+                📊 Monthly History
+                </div>
+                """,
+                unsafe_allow_html=True
             )
 
+
+            history = get_monthly(uid)
+
+
+            if not history.empty:
+
+                st.dataframe(
+                    history,
+                    hide_index=True,
+                    use_container_width=True,
+                    height=220
+                )
+
+            else:
+
+                st.caption(
+                    "Nema mesečne istorije"
+                )
+
+
+
+            # -------------------
+            # PROMO HISTORY
+            # -------------------
+
+            st.markdown(
+                """
+                <div class="small-title">
+                🎁 Promo History
+                </div>
+                """,
+                unsafe_allow_html=True
+            )
+
+
+            promo = get_promo(uid)
+
+
+            if not promo.empty:
+
+                st.dataframe(
+                    promo,
+                    hide_index=True,
+                    use_container_width=True,
+                    height=180
+                )
+
+            else:
+
+                st.caption(
+                    "Nema promo zapisa"
+                )
+                # ==========================
+# EDIT PLAYER
+# ==========================
+
+if menu == "🔍 Player":
+
+    if uid and not player.empty:
+
+
+        p = player.iloc[0]
+
+
+        st.markdown(
+            """
+            <div class="small-title">
+            ✏️ Edit Player
+            </div>
+            """,
+            unsafe_allow_html=True
+        )
+
+
+        col1, col2 = st.columns(2)
+
+
+        with col1:
 
             closure = st.selectbox(
                 "Closure",
@@ -390,12 +668,15 @@ if menu == "🔍 Player":
             )
 
 
+        with col2:
+
             reward = st.multiselect(
                 "Reward Preference",
                 [
                     "Cashback",
                     "Bonus",
-                    "Free Spins"
+                    "Free Spins",
+                    "All"
                 ],
                 default=
                 p["reward"].split(",")
@@ -404,7 +685,10 @@ if menu == "🔍 Player":
             )
 
 
-            tags_list = [
+
+        tags = st.multiselect(
+            "Tags",
+            [
                 "Bonus Hunter",
                 "Chargeback",
                 "Closure Risk",
@@ -412,97 +696,59 @@ if menu == "🔍 Player":
                 "Free Spins Lover",
                 "High Depositor",
                 "Reactivated"
-            ]
+            ],
+            default=
+            p["tags"].split(",")
+            if p["tags"]
+            else []
+        )
 
 
-            tags = st.multiselect(
-                "Tags",
-                tags_list,
-                default=
-                p["tags"].split(",")
-                if p["tags"]
-                else []
-            )
+        notes = st.text_area(
+            "Notes",
+            value=p["notes"],
+            height=100
+        )
 
 
-            notes = st.text_area(
-                "Notes",
-                value=p["notes"]
-            )
+        if st.button(
+            "💾 Save Changes"
+        ):
 
 
-
-            if st.button(
-                "💾 Save"
-            ):
-
-                save_player(
-                    uid,
-                    p["brand"],
-                    closure,
-                    ",".join(reward),
-                    ",".join(tags),
-                    notes
-                )
-
-
-                st.success(
-                    "Sačuvano"
-                )
-
-                st.rerun()
-
-
-
-            st.divider()
-
-
-            st.subheader(
-                "📊 Monthly History"
-            )
-
-
-            history = pd.read_sql(
-                """
-                SELECT
-                month,
-                deposit,
-                segment,
-                status,
+            save_player(
+                uid,
+                p["brand"],
+                closure,
+                ",".join(reward),
+                ",".join(tags),
                 notes
-                FROM monthly
-                WHERE uid=?
-                ORDER BY id
-                """,
-                conn,
-                params=(uid,)
             )
 
 
-            if not history.empty:
+            st.success(
+                "Sačuvano!"
+            )
 
-                st.dataframe(
-                    history,
-                    hide_index=True,
-                    use_container_width=True
-                )
+            st.rerun()
 
-            else:
 
-                st.info(
-                    "Nema istorije"
-                )
-              # =========================
-# MANUAL PROMO ADD
-# =========================
+
+
+# ==========================
+# PROMO ADD
+# ==========================
 
 if menu == "🎁 Promo":
 
-    st.header("🎁 Add Promo Information")
+
+    st.subheader(
+        "🎁 Add Promo"
+    )
 
 
     uid = st.text_input(
-        "UID igrača"
+        "UID"
     )
 
 
@@ -515,7 +761,7 @@ if menu == "🎁 Promo":
         if player.empty:
 
             st.warning(
-                "Ovaj UID ne postoji. Prvo uploaduj BII mesec."
+                "UID ne postoji"
             )
 
 
@@ -523,14 +769,26 @@ if menu == "🎁 Promo":
 
 
             st.success(
-                f"Igrač pronađen: {player.iloc[0]['brand']}"
+                f"{player.iloc[0]['brand']}"
             )
 
 
-            month = st.text_input(
-                "Mesec",
-                placeholder="npr. June 2026"
-            )
+            c1, c2 = st.columns(2)
+
+
+            with c1:
+
+                month = st.text_input(
+                    "Mesec",
+                    placeholder="June 2026"
+                )
+
+
+            with c2:
+
+                amount = st.text_input(
+                    "Amount"
+                )
 
 
             promo_type = st.multiselect(
@@ -544,14 +802,11 @@ if menu == "🎁 Promo":
             )
 
 
-            amount = st.text_input(
-                "Promo Amount"
-            )
-
-
             notes = st.text_area(
-                "Promo Notes"
+                "Promo Notes",
+                height=80
             )
+
 
 
             if st.button(
@@ -585,44 +840,8 @@ if menu == "🎁 Promo":
 
 
                 st.success(
-                    "Promo dodat!"
+                    "Promo dodat"
                 )
 
 
-            st.divider()
-
-
-            st.subheader(
-                "🎁 Promo History"
-            )
-
-
-            promo = pd.read_sql(
-                """
-                SELECT
-                month,
-                promo_type,
-                amount,
-                notes
-                FROM promo
-                WHERE uid=?
-                ORDER BY id
-                """,
-                conn,
-                params=(uid,)
-            )
-
-
-            if not promo.empty:
-
-                st.dataframe(
-                    promo,
-                    hide_index=True,
-                    use_container_width=True
-                )
-
-            else:
-
-                st.info(
-                    "Nema promo zapisa."
-                )
+                st.rerun()
