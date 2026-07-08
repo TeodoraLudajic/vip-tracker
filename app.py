@@ -616,13 +616,8 @@ if menu == "🔍 Player":
                     f"""
                     <div class="vip-card">
 
-                    <b>Reward</b><br>
-                    {reward}
-
-                    <br>
-
-                    <b>Tags</b><br>
-                    {tags}
+                   <b>Reward:</b> {reward}<br>
+                   <b>Tags:</b> {tags}
 
                     </div>
                     """,
