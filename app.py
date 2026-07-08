@@ -592,38 +592,173 @@ if menu == "🔍 Player":
 
 
 
-            # -------------------
-            # PROMO HISTORY
-            # -------------------
+           # -------------------
+# PROMO HISTORY + EDIT
+# -------------------
 
-            st.markdown(
+st.markdown(
+    """
+    <div class="small-title">
+    🎁 Promo History
+    </div>
+    """,
+    unsafe_allow_html=True
+)
+
+
+promo = pd.read_sql(
+    """
+    SELECT
+    id,
+    month AS Month,
+    promo_type AS Promo,
+    amount AS Amount,
+    notes AS Notes
+    FROM promo
+    WHERE uid=?
+    ORDER BY id
+    """,
+    conn,
+    params=(uid,)
+)
+
+
+if not promo.empty:
+
+
+    st.dataframe(
+        promo.drop(columns=["id"]),
+        hide_index=True,
+        use_container_width=True,
+        height=180
+    )
+
+
+    st.markdown("#### ✏️ Edit Promo")
+
+
+    selected_promo = st.selectbox(
+        "Izaberi promo za izmenu",
+        promo["id"].tolist(),
+        format_func=lambda x:
+            f"{promo[promo['id']==x]['Month'].values[0]} - {promo[promo['id']==x]['Promo'].values[0]}"
+    )
+
+
+    selected = promo[
+        promo["id"] == selected_promo
+    ].iloc[0]
+
+
+    edit_col1, edit_col2 = st.columns(2)
+
+
+    with edit_col1:
+
+        edit_month = st.text_input(
+            "Mesec",
+            value=selected["Month"]
+        )
+
+
+        edit_amount = st.text_input(
+            "Amount",
+            value=str(selected["Amount"])
+        )
+
+
+    with edit_col2:
+
+        edit_promo = st.multiselect(
+            "Promo Type",
+            [
+                "Cashback",
+                "Bonus",
+                "Free Spins",
+                "Tournament"
+            ],
+            default=[
+                x for x in str(selected["Promo"]).split(",")
+                if x
+            ]
+        )
+
+
+        edit_notes = st.text_area(
+            "Promo Notes",
+            value=selected["Notes"],
+            height=80
+        )
+
+
+    b1, b2 = st.columns(2)
+
+
+    with b1:
+
+        if st.button(
+            "💾 Save Promo Changes"
+        ):
+
+            cur.execute(
                 """
-                <div class="small-title">
-                🎁 Promo History
-                </div>
+                UPDATE promo
+                SET
+                month=?,
+                promo_type=?,
+                amount=?,
+                notes=?
+                WHERE id=?
                 """,
-                unsafe_allow_html=True
+                (
+                    edit_month,
+                    ",".join(edit_promo),
+                    edit_amount,
+                    edit_notes,
+                    selected_promo
+                )
             )
 
+            conn.commit()
 
-            promo = get_promo(uid)
+            st.success(
+                "Promo izmenjen"
+            )
+
+            st.rerun()
 
 
-            if not promo.empty:
 
-                st.dataframe(
-                    promo,
-                    hide_index=True,
-                    use_container_width=True,
-                    height=180
+    with b2:
+
+        if st.button(
+            "🗑 Delete Promo"
+        ):
+
+            cur.execute(
+                """
+                DELETE FROM promo
+                WHERE id=?
+                """,
+                (
+                    selected_promo,
                 )
+            )
 
-            else:
+            conn.commit()
 
-                st.caption(
-                    "Nema promo zapisa"
-                )
-                # ==========================
+            st.success(
+                "Promo obrisan"
+            )
+
+            st.rerun()
+
+
+else:
+
+    st.caption(
+        "Nema promo zapisa"
+    )
 # EDIT PLAYER
 # ==========================
 
