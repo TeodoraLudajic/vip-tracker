@@ -316,7 +316,7 @@ menu = st.sidebar.radio(
         "🔍 Player",
         "📥 Upload Month",
         "🗂 Manage Uploads",
-        "🎁 Promo"
+        "🎁 Promo",
         "📉 Missing Players"
     ]
 )
