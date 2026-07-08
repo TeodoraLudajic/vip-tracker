@@ -277,7 +277,6 @@ def get_monthly(uid):
         month AS Month,
         deposit AS Deposit,
         segment AS Segment,
-        status AS Status
         FROM monthly
         WHERE uid=?
         ORDER BY id
@@ -649,7 +648,7 @@ if menu == "🔍 Player":
                     hide_index=True,
                     use_container_width=True,
                     height=220,
-                    disabled=["id", "Month", "Segment", "Status"],
+                    disabled=["id", "Month", "Segment"],
                     column_config={
                         "id": None
                     }
