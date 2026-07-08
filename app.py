@@ -2,66 +2,69 @@ import streamlit as st
 import pandas as pd
 import sqlite3
 
-# Povezivanje na bazu sa dozvolom za više korisnika (timeout čeka 10s da se baza otključa)
+# Povezivanje na bazu
 conn = sqlite3.connect('vip_podaci.db', check_same_thread=False, timeout=10)
 c = conn.cursor()
 
-# Kreiranje tabele ako ne postoji
+# Kreiranje tabele sa svim potrebnim kolonama
 c.execute('''CREATE TABLE IF NOT EXISTS baza_igraca 
-             (uid TEXT, mesec TEXT, iznos REAL, brand TEXT, segment TEXT, closure TEXT, zadovoljan TEXT, voli TEXT, napomena TEXT)''')
+             (uid TEXT, mesec TEXT, iznos REAL, brand TEXT, segment TEXT, 
+              promo_status TEXT, promo_iznos REAL, closure TEXT, zadovoljan TEXT, voli TEXT, napomena TEXT)''')
 conn.commit()
 
 st.title("VIP Asistent - Tvoj BO")
 
+# --- SEKCIJA ZA UPLOAD ---
 uploaded_file = st.file_uploader("Ubaci CSV izveštaj", type="csv")
 if uploaded_file:
     df = pd.read_csv(uploaded_file)
-    mesec_input = st.text_input("Mesec/godina:")
-    if st.button("Učitaj u bazu") and mesec_input:
+    mesec_input = st.text_input("Mesec/godina (npr. Jul 2026):")
+    is_promo = st.checkbox("Da li je ovo PROMO period?")
+    
+    if st.button("Učitaj i ažuriraj bazu") and mesec_input:
         for _, row in df.iterrows():
-            c.execute("INSERT INTO baza_igraca (uid, mesec, iznos, brand, segment) VALUES (?,?,?,?,?)", 
-                      (str(row['customer_id']), mesec_input, row['bins'], row['brand'], row['vips']))
+            p_iznos = row['bins'] if is_promo else 0.0
+            p_status = "DA" if is_promo else "NE"
+            
+            c.execute("""INSERT INTO baza_igraca 
+                         (uid, mesec, iznos, brand, segment, promo_status, promo_iznos) 
+                         VALUES (?,?,?,?,?,?,?)""", 
+                      (str(row['customer_id']), mesec_input, row['bins'], row['brand'], row['vips'], p_status, p_iznos))
         conn.commit()
-        st.success("Podaci ubačeni!")
+        st.success("Podaci uspešno dodati!")
 
 st.divider()
 
-uid_search = st.text_input("Ukucaj UID igrača:")
+# --- SEKCIJA ZA PRETRAGU I EDITOVANJE ---
+uid_search = st.text_input("Ukucaj UID igrača za pretragu:")
 
 if uid_search:
-    # Čitanje podataka
-    df_search = pd.read_sql(f"SELECT * FROM baza_igraca WHERE uid='{uid_search}'", conn)
+    # Čitamo podatke sa rowid (potreban za editovanje)
+    df_search = pd.read_sql(f"SELECT rowid, * FROM baza_igraca WHERE uid='{uid_search}'", conn)
     
     if not df_search.empty:
-        st.dataframe(df_search)
+        st.write(f"### Istorija za UID: {uid_search}")
         
-        # Forma za editovanje - pamti staro
-        with st.form("edit_forma"):
-            c_status = st.text_input("Status closure?")
-            zad = st.text_input("Zadovoljan?")
-            vol = st.text_input("Voli (Bonus/FS)?")
-            nap = st.text_area("Napomena")
-            
-            if st.form_submit_button("Sačuvaj beleške"):
-                # 1. Uzmemo šta već piše u bazi (poslednji unos za taj UID)
-                stari_podaci = c.execute("SELECT closure, zadovoljan, voli, napomena FROM baza_igraca WHERE uid=? ORDER BY rowid DESC LIMIT 1", (uid_search,)).fetchone()
-                
-                # 2. Ako polje u formi ostane prazno, zadrži staro
-                novi_closure = c_status if c_status else (stari_podaci[0] if stari_podaci else "")
-                novi_zad = zad if zad else (stari_podaci[1] if stari_podaci else "")
-                novi_vol = vol if vol else (stari_podaci[2] if stari_podaci else "")
-                nova_nap = nap if nap else (stari_podaci[3] if stari_podaci else "")
-                
-                # 3. Update u bazi
+        # Interaktivna tabela
+        edited_df = st.data_editor(
+            df_search, 
+            column_config={"rowid": None}, # Sakrivamo sistemski ID
+            num_rows="fixed"
+        )
+        
+        if st.button("Sačuvaj izmene iz tabele"):
+            for index, row in edited_df.iterrows():
                 try:
                     c.execute("""UPDATE baza_igraca 
-                                 SET closure=?, zadovoljan=?, voli=?, napomena=? 
-                                 WHERE uid=?""", 
-                              (novi_closure, novi_zad, novi_vol, nova_nap, uid_search))
+                                 SET closure=?, zadovoljan=?, voli=?, napomena=?, promo_status=?, promo_iznos=? 
+                                 WHERE rowid=?""", 
+                              (row['closure'], row['zadovoljan'], row['voli'], row['napomena'], 
+                               row['promo_status'], row['promo_iznos'], row['rowid']))
                     conn.commit()
-                    st.success("Sačuvano! Osveži stranicu.")
-                    st.rerun()
                 except Exception as e:
-                    st.error(f"Greška: {e}")
+                    st.error(f"Greška kod reda {row['rowid']}: {e}")
+            
+            st.success("Sve izmene su sačuvane!")
+            st.rerun()
     else:
-        st.warning("Nema podataka za ovaj UID.")
+        st.warning("Nema podataka za taj UID.")
