@@ -536,6 +536,12 @@ if menu == "🔍 Player":
 
             with c3:
 
+                reward = (
+                    p["reward"]
+                    if p["reward"]
+                    else "-"
+                )
+
                 tags = (
                     p["tags"]
                     if p["tags"]
@@ -547,15 +553,18 @@ if menu == "🔍 Player":
                     f"""
                     <div class="vip-card">
 
-                    <b>Tags</b><br>
+                    <b>Reward Preference</b><br>
+                    {reward}
 
+                    <br><br>
+
+                    <b>Tags</b><br>
                     {tags}
 
                     </div>
                     """,
                     unsafe_allow_html=True
                 )
-
 
 
             # -------------------
