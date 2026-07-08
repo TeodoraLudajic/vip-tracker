@@ -457,7 +457,58 @@ if menu == "📥 Upload Month":
                 )
 
 
+# ==========================
+# MANAGE UPLOADS
+# ==========================
 
+if menu == "🗂 Manage Uploads":
+
+    st.subheader("🗂 Uploaded Months")
+
+
+    uploads = pd.read_sql(
+        """
+        SELECT
+        month AS Month,
+        COUNT(*) AS Players
+        FROM monthly
+        GROUP BY month
+        ORDER BY month
+        """,
+        conn
+    )
+
+
+    st.dataframe(
+        uploads,
+        hide_index=True,
+        use_container_width=True
+    )
+
+
+    delete_month = st.selectbox(
+        "Delete month",
+        uploads["Month"].tolist()
+    )
+
+
+    if st.button("🗑 Delete Selected Month"):
+
+        cur.execute(
+            """
+            DELETE FROM monthly
+            WHERE month=?
+            """,
+            (delete_month,)
+        )
+
+        conn.commit()
+
+        st.success(
+            "Mesec obrisan"
+        )
+
+        st.rerun()
 
 # ==========================
 # PLAYER PAGE
