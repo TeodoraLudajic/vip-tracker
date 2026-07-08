@@ -513,6 +513,90 @@ if menu == "🗂 Manage Uploads":
         st.rerun()
 
 # ==========================
+# MISSING PLAYERS
+# ==========================
+
+if menu == "📉 Missing Players":
+
+    st.subheader("📉 Players Missing From Current Month")
+
+
+    months = pd.read_sql(
+        """
+        SELECT DISTINCT month
+        FROM monthly
+        """,
+        conn
+    )["month"].tolist()
+
+
+    selected_month = st.selectbox(
+        "Izaberi trenutni mesec",
+        months
+    )
+
+
+    current_players = pd.read_sql(
+        """
+        SELECT uid
+        FROM monthly
+        WHERE month=?
+        """,
+        conn,
+        params=(selected_month,)
+    )
+
+
+    all_previous = pd.read_sql(
+        """
+        SELECT 
+        uid,
+        month,
+        segment,
+        status
+        FROM monthly
+        WHERE month != ?
+        """,
+        conn,
+        params=(selected_month,)
+    )
+
+
+    missing = all_previous[
+        ~all_previous["uid"].isin(
+            current_players["uid"]
+        )
+    ]
+
+
+    if missing.empty:
+
+        st.success(
+            "Nema igrača koji fale 🎉"
+        )
+
+    else:
+
+        st.write(
+            f"Broj igrača koji nisu u {selected_month}: {missing['uid'].nunique()}"
+        )
+
+
+        last_seen = (
+            missing
+            .sort_values("month")
+            .groupby("uid")
+            .tail(1)
+        )
+
+
+        st.dataframe(
+            last_seen,
+            hide_index=True,
+            use_container_width=True
+        )
+        
+# ==========================
 # PLAYER PAGE
 # ==========================
 
