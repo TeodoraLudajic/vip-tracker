@@ -553,10 +553,10 @@ if menu == "🔍 Player":
                     f"""
                     <div class="vip-card">
 
-                    <b>Reward Preference</b><br>
+                    <b>Reward</b><br>
                     {reward}
 
-                    <br><br>
+                    <br>
 
                     <b>Tags</b><br>
                     {tags}
