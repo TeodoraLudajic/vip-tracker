@@ -649,10 +649,13 @@ if menu == "🔍 Player":
                     hide_index=True,
                     use_container_width=True,
                     height=220,
-                    disabled=["id", "Month", "Segment", "Status"]
+                    disabled=["id", "Month", "Segment", "Status"],
+                    column_config={
+                        "id": None
+                    }
                 )
 
-                if st.button("💾 Save Monthly Changes"):
+                if st.button("💾 Save"):
 
                     for _, row in edited_history.iterrows():
 
