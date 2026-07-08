@@ -645,10 +645,10 @@ if menu == "🔍 Player":
             if not history.empty:
 
                 edited_history = st.data_editor(
-                    history,
+                    history.drop(columns=["Status"]),
                     hide_index=True,
                     use_container_width=True,
-                    height=220,
+                    height=200,
                     disabled=["id", "Month", "Segment", "Status"],
                     column_config={
                         "id": None
