@@ -9,7 +9,7 @@ import sqlite3
 
 st.set_page_config(
     page_title="VIP BO",
-    page_icon="🎰",
+    page_icon="👑",
     layout="wide"
 )
 
@@ -314,6 +314,7 @@ menu = st.sidebar.radio(
     [
         "🔍 Player",
         "📥 Upload Month",
+        "🗂 Manage Uploads",
         "🎁 Promo"
     ]
 )
