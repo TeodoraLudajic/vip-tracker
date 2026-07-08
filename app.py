@@ -3,7 +3,7 @@ import pandas as pd
 import sqlite3
 
 # Povezivanje sa bazom
-conn = sqlite3.connect('vip_podaci.db')
+conn = sqlite3.connect('vip_podaci_v2.db')
 c = conn.cursor()
 
 # OVO JE BITNO: Obezbeđujemo da tabela uvek bude ispravna
