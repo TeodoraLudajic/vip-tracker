@@ -93,7 +93,7 @@ st.markdown("""
 
     background-color:#181818;
 
-    padding:14px;
+    padding:2px;
 
     border-radius:12px;
 
