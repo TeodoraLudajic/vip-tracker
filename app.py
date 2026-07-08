@@ -327,7 +327,7 @@ st.title("🎰 VIP Back Office")
 
 if menu == "📥 Upload Month":
 
-    st.subheader("📥 Upload BII Monthly Report")
+    st.subheader("📥 Upload Monthly Report")
 
 
     month = st.text_input(
