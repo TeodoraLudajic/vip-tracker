@@ -359,7 +359,18 @@ if menu == "📥 Upload Month":
             "⬆️ Import Month"
         ):
 
+            cur.execute(
+                """
+                DELETE FROM monthly
+                WHERE month=?
+                """,
+                (
+                    month,
+                )
+            )
 
+            conn.commit()
+            
             needed = [
                 "customer_id",
                 "brand",
