@@ -594,11 +594,26 @@ if menu == "📉 Missing Players":
         )
 
 
-        st.dataframe(
-            last_seen,
-            hide_index=True,
-            use_container_width=True
-        )
+        for _, row in last_seen.iterrows():
+
+            col1, col2, col3, col4 = st.columns([2, 2, 2, 1])
+
+            with col1:
+                st.write(row["uid"])
+
+            with col2:
+                st.write(row.get("Brand", ""))
+
+            with col3:
+                st.write(row["month"])
+
+            with col4:
+                if st.button(
+                    "📋 Copy",
+                    key=f"copy_{row['uid']}"
+                ):
+                    copy_to_clipboard(str(row["uid"]))
+                    st.success("UID copied")
         
 # ==========================
 # PLAYER PAGE
