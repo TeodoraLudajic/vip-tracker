@@ -607,11 +607,14 @@ if menu == "📉 Missing Players":
                 st.write(row["month"])
 
             with col4:
-                if st.button(
-                    "📋 Copy",
-                    key=f"copy_{row['uid']}"
-                ):
-                    st.success(f"UID: {row['uid']}")
+                components.html(
+                    f"""
+                    <button onclick="navigator.clipboard.writeText('{row["uid"]}')">
+                    📋 Copy
+                    </button>
+                    """,
+                    height=40
+                )
         
 # ==========================
 # PLAYER PAGE
