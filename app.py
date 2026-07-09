@@ -610,8 +610,7 @@ if menu == "📉 Missing Players":
                     "📋 Copy",
                     key=f"copy_{row['uid']}"
                 ):
-                    copy_to_clipboard(str(row["uid"]))
-                    st.success("UID copied")
+                    st.success(f"UID: {row['uid']}")
         
 # ==========================
 # PLAYER PAGE
