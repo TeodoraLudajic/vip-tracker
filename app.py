@@ -547,7 +547,7 @@ if menu == "📉 Missing Players":
     )
 
 
-       all_previous = pd.read_sql(
+    all_previous = pd.read_sql(
         """
         SELECT
             m.uid,
@@ -562,7 +562,7 @@ if menu == "📉 Missing Players":
         """,
         conn,
         params=(selected_month,)
-    )
+     )
 
 
     missing = all_previous[
