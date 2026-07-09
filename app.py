@@ -592,6 +592,24 @@ if menu == "📉 Missing Players":
             .tail(1)
         )
 
+
+        brands = ["All"] + sorted(
+            last_seen["Brand"].dropna().unique().tolist()
+        )
+
+
+        selected_brand = st.selectbox(
+            "Filter Brand",
+            brands
+        )
+
+
+        if selected_brand != "All":
+
+            last_seen = last_seen[
+                last_seen["Brand"] == selected_brand
+            ]
+
         
         last_seen = last_seen.head(100)
 
