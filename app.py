@@ -611,7 +611,7 @@ if menu == "📉 Missing Players":
             ]
 
         
-        last_seen = last_seen.head(100)
+        last_seen = last_seen.head(200)
 
 
         for _, row in last_seen.iterrows():
