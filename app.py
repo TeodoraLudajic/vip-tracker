@@ -547,22 +547,22 @@ if menu == "📉 Missing Players":
     )
 
 
-   all_previous = pd.read_sql(
-    """
-    SELECT
-        m.uid,
-        p.brand AS Brand,
-        m.month,
-        m.segment,
-        m.status
-    FROM monthly m
-    LEFT JOIN players p
-        ON m.uid = p.uid
-    WHERE m.month != ?
-    """,
-    conn,
-    params=(selected_month,)
-)
+       all_previous = pd.read_sql(
+        """
+        SELECT
+            m.uid,
+            p.brand AS Brand,
+            m.month,
+            m.segment,
+            m.status
+        FROM monthly m
+        LEFT JOIN players p
+            ON m.uid = p.uid
+        WHERE m.month != ?
+        """,
+        conn,
+        params=(selected_month,)
+    )
 
 
     missing = all_previous[
