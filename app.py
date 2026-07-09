@@ -1,6 +1,7 @@
 import streamlit as st
 import pandas as pd
 import sqlite3
+from streamlit_copy_to_clipboard import copy_to_clipboard
 
 
 # ==========================
