@@ -592,6 +592,9 @@ if menu == "📉 Missing Players":
             .tail(1)
         )
 
+        
+        last_seen = last_seen.head(100)
+
 
         for _, row in last_seen.iterrows():
 
