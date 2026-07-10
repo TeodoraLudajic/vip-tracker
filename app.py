@@ -622,7 +622,12 @@ if menu == "📉 Missing Players":
                 components.html(
                     f"""
                     <div style="display:flex;align-items:center;gap:8px;">
-                        <span style="font-family:monospace;">
+
+                        <span style="
+                            color: white;
+                            font-size: 14px;
+                            font-weight: 400;
+                        ">
                             {row["uid"]}
                         </span>
 
