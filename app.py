@@ -531,7 +531,7 @@ if menu == "📉 Missing Players":
 
 
     selected_month = st.selectbox(
-        "Izaberi trenutni mesec",
+        "Mesec",
         months
     )
 
