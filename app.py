@@ -616,26 +616,46 @@ if menu == "📉 Missing Players":
 
         for _, row in last_seen.iterrows():
 
-            col1, col2, col3, col4 = st.columns([2, 2, 2, 1])
+            col1, col2, col3 = st.columns([3, 2, 2])
 
             with col1:
-                st.write(row["uid"])
+                components.html(
+                    f"""
+                    <div style="display:flex;align-items:center;gap:8px;">
+                        <span style="font-family:monospace;">
+                            {row["uid"]}
+                        </span>
+
+                        <button
+                            onclick="
+                                navigator.clipboard.writeText('{row['uid']}');
+                                this.innerHTML='✔';
+                                setTimeout(() => {{
+                                    this.innerHTML='⧉';
+                                }},1500);
+                            "
+                            style="
+                                background:#111827;
+                                color:white;
+                                border:none;
+                                border-radius:6px;
+                                width:28px;
+                                height:28px;
+                                cursor:pointer;
+                                font-size:15px;
+                            ">
+                            ⧉
+                        </button>
+                    </div>
+                    """,
+                    height=38,
+                )
 
             with col2:
                 st.write(row.get("Brand", ""))
 
             with col3:
                 st.write(row["month"])
-
-            with col4:
-                components.html(
-                    f"""
-                    <button onclick="navigator.clipboard.writeText('{row["uid"]}')">
-                    📋 Copy
-                    </button>
-                    """,
-                    height=40
-                )
         
 # ==========================
 # PLAYER PAGE
