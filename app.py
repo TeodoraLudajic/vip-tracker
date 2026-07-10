@@ -599,7 +599,7 @@ if menu == "📉 Missing Players":
 
 
         selected_brand = st.selectbox(
-            "Filter Brand",
+            "Brand",
             brands
         )
 
