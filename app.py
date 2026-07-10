@@ -581,7 +581,7 @@ if menu == "📉 Missing Players":
     else:
 
         st.write(
-            f"Broj igrača koji nisu u {selected_month}: {missing['uid'].nunique()}"
+            f"Fale u {selected_month}: {missing['uid'].nunique()}"
         )
 
 
