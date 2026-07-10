@@ -659,7 +659,7 @@ if menu == "📉 Missing Players":
                         </button>
                     </div>
                     """,
-                    height=30,
+                    height=20,
                 )
 
         
