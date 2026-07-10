@@ -616,9 +616,15 @@ if menu == "📉 Missing Players":
 
         for _, row in last_seen.iterrows():
 
-            col1, col2, col3 = st.columns([3, 2, 2])
+            col1, col2, col3 = st.columns([1, 1, 2])
 
             with col1:
+                st.write(row["month"])
+
+            with col2:
+                st.write(row.get("Brand", ""))
+
+            with col3:
                 components.html(
                     f"""
                     <div style="display:flex;align-items:center;gap:8px;">
@@ -656,11 +662,6 @@ if menu == "📉 Missing Players":
                     height=38,
                 )
 
-            with col2:
-                st.write(row.get("Brand", ""))
-
-            with col3:
-                st.write(row["month"])
         
 # ==========================
 # PLAYER PAGE
