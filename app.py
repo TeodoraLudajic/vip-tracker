@@ -416,9 +416,9 @@ if menu == "➜] Add Month":
 # MANAGE UPLOADS
 # ==========================
 
-if menu == "🗂 Manage Uploads":
+if menu == "☰ Manage Uploads":
 
-    st.subheader("🗂 Uploaded Months")
+    st.subheader("☰ Uploaded Months")
 
 
     uploads = pd.read_sql(
