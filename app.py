@@ -37,70 +37,71 @@ setup_db()
 # ==========================
 # STYLE
 # ==========================
-
 st.markdown("""
 <style>
-/* Globalni Obsidian luksuz */
+/* Resetovanje standardnih Streamlit boja */
 .stApp {
-    background: radial-gradient(circle at top right, #1a1a1a, #050505) !important;
-    background-image: url('https://www.transparenttextures.com/patterns/black-marble.png') !important;
+    background-color: #0f0f0f !important;
 }
 
-/* Sidebar redizajn */
+/* Naslovi - Zlatna boja */
+h1, h2, h3, .st-emotion-cache-10tr36v {
+    color: #C5A059 !important;
+    font-family: 'Inter', sans-serif !important;
+}
+
+/* Sidebar - Tamna osnova sa zlatnom linijom */
 section[data-testid="stSidebar"] {
-    background: rgba(10, 10, 10, 0.8) !important;
-    backdrop-filter: blur(15px);
+    background-color: #0d0d0d !important;
     border-right: 1px solid #C5A059 !important;
 }
 
-/* Glassmorphism kartice */
-.vip-card {
-    background: rgba(20, 20, 20, 0.6) !important;
-    backdrop-filter: blur(12px);
-    border: 1px solid rgba(197, 160, 89, 0.4) !important;
-    border-radius: 15px !important;
-    padding: 20px !important;
-    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.8) !important;
-    color: #e0e0e0 !important;
-    margin-bottom: 20px;
+/* Radio dugmići (Navigacija) */
+div[role="radiogroup"] {
+    gap: 10px !important;
 }
 
-/* Zlatni glow efekti */
-h1, h2, h3, .small-title {
-    color: #D4AF37 !important;
-    text-shadow: 0 0 10px rgba(197, 160, 89, 0.5) !important;
-    font-weight: 700 !important;
-    text-transform: uppercase;
-    letter-spacing: 2px !important;
+div[role="radiogroup"] label {
+    background: transparent !important;
+    border: 1px solid #C5A059 !important;
+    border-radius: 8px !important;
+    padding: 10px !important;
+}
+
+div[role="radiogroup"] label span {
+    color: #C5A059 !important;
+}
+
+div[role="radiogroup"] label:has(input:checked) {
+    background: #C5A059 !important;
+}
+
+div[role="radiogroup"] label:has(input:checked) span {
+    color: #000 !important;
+    font-weight: bold !important;
 }
 
 /* Input polja */
-.stTextInput input, .stSelectbox div {
-    background: rgba(0, 0, 0, 0.3) !important;
-    border: 1px solid #C5A059 !important;
+div[data-baseweb="input"] input {
+    background-color: #1a1a1a !important;
+    color: white !important;
+    border: 1px solid #333 !important;
     border-radius: 8px !important;
-    color: #fff !important;
 }
 
-/* Premium dugmad */
-button {
-    background: linear-gradient(45deg, #C5A059, #8B6508) !important;
-    color: #000 !important;
-    font-weight: 800 !important;
-    border: none !important;
-    border-radius: 8px !important;
-    transition: 0.3s !important;
-}
-
-button:hover {
-    transform: scale(1.05);
-    box-shadow: 0 0 20px rgba(197, 160, 89, 0.6) !important;
-}
-
-/* Dataframe stajling */
-[data-testid="stDataFrame"] {
+/* Kartice (VIP Card) */
+.vip-card {
+    background: rgba(26, 26, 26, 0.8) !important;
     border: 1px solid #C5A059 !important;
-    border-radius: 10px !important;
+    border-radius: 12px !important;
+    padding: 20px !important;
+    color: white !important;
+}
+
+.small-title {
+    color: #C5A059 !important;
+    font-weight: bold !important;
+    margin-bottom: 10px !important;
 }
 </style>
 """, unsafe_allow_html=True)
