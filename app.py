@@ -40,75 +40,274 @@ setup_db()
 
 st.markdown("""
 <style>
-/* 1. Luksuzna Mermerna Podloga */
+
+/* ===== GLOBAL BACKGROUND ===== */
+
 .stApp {
-    background-color: #050505 !important;
-    background-image: url('https://www.transparenttextures.com/patterns/black-marble.png') !important;
-    background-size: cover !important;
+    background:
+    radial-gradient(circle at top left, rgba(212,175,55,0.12), transparent 35%),
+    radial-gradient(circle at bottom right, rgba(255,255,255,0.05), transparent 40%),
+    #050505 !important;
 }
 
-/* 2. Centralni Kontejner - Executive Look */
+
+/* ===== MAIN AREA ===== */
+
 .main .block-container {
-    background: rgba(10, 10, 10, 0.6) !important;
-    backdrop-filter: blur(20px) !important;
-    border: 1px solid rgba(197, 160, 89, 0.4) !important;
-    border-radius: 20px !important;
-    padding: 3rem !important;
-    box-shadow: 0 10px 40px rgba(0,0,0,0.9) !important;
+
+    max-width: 1200px !important;
+
+    padding-top: 2rem !important;
+    padding-left: 3rem !important;
+    padding-right: 3rem !important;
+
 }
 
-/* 3. Zlatni Glow Naslovi */
-h1, h2, h3, .st-emotion-cache-1wivap2 {
-    color: #D4AF37 !important;
-    text-shadow: 0 0 15px rgba(212, 175, 55, 0.8) !important;
-    font-weight: 900 !important;
-    text-transform: uppercase !important;
-    letter-spacing: 4px !important;
-}
 
-/* 4. Sidebar - Elegantni Terminal */
+/* ===== SIDEBAR LUXURY ===== */
+
+
 section[data-testid="stSidebar"] {
-    background: rgba(10, 10, 10, 0.95) !important;
-    border-right: 2px solid #C5A059 !important;
+
+    background:
+    linear-gradient(
+        180deg,
+        #0b0b0b,
+        #050505
+    ) !important;
+
+    border-right:
+    1px solid rgba(212,175,55,0.35);
+
 }
 
-/* 5. Inputi - Zlatni border i mračna pozadina */
-.stTextInput > div > div > input, 
-.stSelectbox > div > div > div {
-    background: rgba(0, 0, 0, 0.5) !important;
-    border: 1px solid #C5A059 !important;
-    border-radius: 8px !important;
-    color: #fff !important;
+
+/* sidebar text */
+
+section[data-testid="stSidebar"] * {
+
+    color:#e8e8e8 !important;
+
 }
 
-/* 6. Premium Dugmad - Zlatni gradijent */
-div.stButton > button {
-    background: linear-gradient(135deg, #C5A059, #8B6508) !important;
-    color: #000 !important;
-    font-weight: 800 !important;
-    border: none !important;
-    border-radius: 6px !important;
-    padding: 10px 25px !important;
-    transition: all 0.3s ease !important;
+
+/* active menu */
+
+section[data-testid="stSidebar"] div[role="radiogroup"] label {
+
+    border-radius:12px;
+    padding:10px 15px;
+    margin:5px 0;
+
 }
 
-div.stButton > button:hover {
-    transform: scale(1.05);
-    box-shadow: 0 0 25px rgba(197, 160, 89, 0.7) !important;
+
+/* active */
+
+section[data-testid="stSidebar"] div[role="radiogroup"] label[data-checked="true"] {
+
+    background:
+    linear-gradient(
+        90deg,
+        #d4af37,
+        #8c6b12
+    ) !important;
+
+    color:black !important;
+
 }
 
-/* 7. Stakleni efekat za Expander i Dataframes */
-.stExpander, [data-testid="stDataFrame"] {
-    background: rgba(20, 20, 20, 0.5) !important;
-    border: 1px solid rgba(197, 160, 89, 0.3) !important;
-    border-radius: 12px !important;
+
+/* ===== TITLES ===== */
+
+
+h1,h2,h3 {
+
+    color:#d4af37 !important;
+
+    font-weight:900 !important;
+
+    letter-spacing:3px !important;
+
+    text-transform:uppercase;
+
 }
 
-/* 8. Zadržavanje gornjeg menija (Share/Deploy) */
-header { visibility: visible !important; }
-#MainMenu { visibility: hidden !important; }
-footer { visibility: hidden !important; }
+
+
+/* small section titles */
+
+
+.small-title {
+
+    color:#d4af37;
+
+    font-size:20px;
+
+    font-weight:800;
+
+    letter-spacing:2px;
+
+    margin-top:25px;
+
+}
+
+
+
+/* ===== INPUTS ===== */
+
+
+.stTextInput input,
+.stSelectbox div[data-baseweb="select"],
+.stMultiSelect div[data-baseweb="select"] {
+
+
+    background:#15151d !important;
+
+    border:
+
+    1px solid rgba(212,175,55,0.35) !important;
+
+
+    border-radius:10px !important;
+
+    color:white !important;
+
+}
+
+
+/* ===== BUTTONS ===== */
+
+
+.stButton button {
+
+
+    background:
+
+    linear-gradient(
+    135deg,
+    #d4af37,
+    #806000
+    ) !important;
+
+
+    color:black !important;
+
+    font-weight:900 !important;
+
+    border-radius:10px !important;
+
+    border:none !important;
+
+}
+
+
+
+.stButton button:hover {
+
+    box-shadow:
+    0 0 25px rgba(212,175,55,0.6);
+
+}
+
+
+
+/* ===== PLAYER CARDS ===== */
+
+
+.vip-card {
+
+
+background:
+
+linear-gradient(
+145deg,
+rgba(255,255,255,0.08),
+rgba(0,0,0,0.5)
+);
+
+
+border:
+
+1px solid rgba(212,175,55,0.35);
+
+
+border-radius:18px;
+
+
+padding:20px;
+
+
+height:90px;
+
+
+box-shadow:
+
+0 10px 30px rgba(0,0,0,0.8);
+
+
+}
+
+
+/* ===== DATAFRAMES ===== */
+
+
+[data-testid="stDataFrame"] {
+
+border-radius:15px !important;
+
+overflow:hidden;
+
+}
+
+
+/* ===== FILE UPLOADER ===== */
+
+
+[data-testid="stFileUploader"] {
+
+
+background:
+
+linear-gradient(
+135deg,
+rgba(212,175,55,0.08),
+rgba(0,0,0,0.6)
+);
+
+
+border:
+
+1px dashed rgba(212,175,55,0.6);
+
+
+border-radius:20px;
+
+
+padding:15px;
+
+
+}
+
+
+/* hide ugly streamlit */
+
+#MainMenu {
+
+visibility:hidden;
+
+}
+
+
+footer {
+
+visibility:hidden;
+
+}
+
+
 </style>
+
 """, unsafe_allow_html=True)
 
 # ==========================
