@@ -37,71 +37,86 @@ setup_db()
 # ==========================
 # STYLE
 # ==========================
+
 st.markdown("""
 <style>
-/* Resetovanje standardnih Streamlit boja */
-.stApp {
-    background-color: #0f0f0f !important;
+/* 1. Pozadina sa teksturom */
+[data-testid="stAppViewContainer"] {
+    background-image: url('https://www.transparenttextures.com/patterns/black-leather.png');
+    background-color: #050505 !important;
 }
 
-/* Naslovi - Zlatna boja */
-h1, h2, h3, .st-emotion-cache-10tr36v {
+/* 2. Sidebar - Elegantni satenski izgled */
+[data-testid="stSidebar"] {
+    background: linear-gradient(180deg, #111111 0%, #000000 100%) !important;
+    border-right: 2px solid #C5A059 !important;
+}
+
+/* 3. Naslovi - Zlatni i istaknuti */
+h1, h2, h3, .stMarkdownContainer > h1, .stMarkdownContainer > h2 {
     color: #C5A059 !important;
-    font-family: 'Inter', sans-serif !important;
+    text-transform: uppercase;
+    letter-spacing: 2px !important;
+    font-weight: 800 !important;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5) !important;
 }
 
-/* Sidebar - Tamna osnova sa zlatnom linijom */
-section[data-testid="stSidebar"] {
-    background-color: #0d0d0d !important;
-    border-right: 1px solid #C5A059 !important;
-}
-
-/* Radio dugmići (Navigacija) */
-div[role="radiogroup"] {
-    gap: 10px !important;
-}
-
-div[role="radiogroup"] label {
-    background: transparent !important;
+/* 4. Navigacija - Radio dugmići */
+[role="radiogroup"] label {
+    background: rgba(197, 160, 89, 0.05) !important;
     border: 1px solid #C5A059 !important;
-    border-radius: 8px !important;
-    padding: 10px !important;
+    margin-bottom: 8px !important;
+    transition: all 0.4s ease !important;
 }
 
-div[role="radiogroup"] label span {
-    color: #C5A059 !important;
+[role="radiogroup"] label:hover {
+    background: rgba(197, 160, 89, 0.2) !important;
 }
 
-div[role="radiogroup"] label:has(input:checked) {
+[role="radiogroup"] label:has(input:checked) {
     background: #C5A059 !important;
-}
-
-div[role="radiogroup"] label:has(input:checked) span {
     color: #000 !important;
-    font-weight: bold !important;
 }
 
-/* Input polja */
-div[data-baseweb="input"] input {
-    background-color: #1a1a1a !important;
-    color: white !important;
-    border: 1px solid #333 !important;
-    border-radius: 8px !important;
+[role="radiogroup"] label:has(input:checked) span {
+    color: #000 !important;
+    font-weight: 900 !important;
 }
 
-/* Kartice (VIP Card) */
-.vip-card {
-    background: rgba(26, 26, 26, 0.8) !important;
+/* 5. Input polja i Select */
+div[data-baseweb="base-input"], div[data-baseweb="select"] {
+    background: #111111 !important;
     border: 1px solid #C5A059 !important;
-    border-radius: 12px !important;
-    padding: 20px !important;
-    color: white !important;
+    border-radius: 4px !important;
 }
 
-.small-title {
-    color: #C5A059 !important;
-    font-weight: bold !important;
-    margin-bottom: 10px !important;
+input {
+    color: #ffffff !important;
+    font-weight: 500 !important;
+}
+
+/* 6. Dugmići - Zlatni luksuz */
+button {
+    background: #C5A059 !important;
+    color: #000 !important;
+    border: none !important;
+    font-weight: 800 !important;
+    border-radius: 2px !important;
+    text-transform: uppercase !important;
+}
+
+button:hover {
+    background: #d4af37 !important;
+    transform: scale(1.02);
+}
+
+/* 7. Kartice */
+.vip-card {
+    background: rgba(0, 0, 0, 0.6) !important;
+    border: 1px solid #C5A059 !important;
+    padding: 25px !important;
+    border-radius: 0px !important; /* Oštre ivice za upscale look */
+    box-shadow: 10px 10px 20px rgba(0,0,0,0.8) !important;
 }
 </style>
 """, unsafe_allow_html=True)
