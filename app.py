@@ -589,15 +589,15 @@ if menu == "📉 Missing Players":
 # PLAYER PAGE
 # ==========================
 
-if menu == "🔍︎ Player":
-    st.subheader("🔍︎ Search Player")
+if menu == "🔍 Player":
+    st.subheader("🔍 Search Player")
     
     col1, col2 = st.columns([2, 1]) 
     with col1:
         uid = st.text_input("UID", placeholder="Unesi UID")
     with col2:
         st.markdown("<br>", unsafe_allow_html=True) 
-        search_btn = st.button("🔍︎ Search")
+        search_btn = st.button("🔍 Search")
 
     if uid or search_btn:
         player = get_player(uid)
