@@ -271,8 +271,8 @@ VIP Management System
 menu = st.sidebar.radio(
     "Navigacija",
     [
-        "🔍 Player",
-        "📥 Upload Month",
+        "👤 Player",
+        "➜] Add Month",
         "🗂 Manage Uploads",
         "🎁 Promo",
         "📉 Missing Players"
