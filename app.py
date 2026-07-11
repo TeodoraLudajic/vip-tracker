@@ -41,37 +41,34 @@ setup_db()
 st.markdown("""
 <style>
 
-/* APP BACKGROUND */
+/* WHOLE APP */
 
-html, body, .stApp {
+.stApp {
     background:#090909 !important;
-    color:white;
 }
 
+
+/* NARROWER WORK AREA */
 
 .main .block-container {
 
-    padding-top:1rem;
-    padding-left:2rem;
-    padding-right:2rem;
+    max-width:1200px;
+
+    padding-top:1.5rem;
+    padding-left:1.5rem;
+    padding-right:1.5rem;
 
 }
+
 
 
 /* SIDEBAR */
 
 section[data-testid="stSidebar"] {
 
-    background:#0d0d0d !important;
+    background:#0b0b0b !important;
 
-    border-right:1px solid rgba(212,175,55,0.5);
-
-}
-
-
-section[data-testid="stSidebar"] * {
-
-    color:#eeeeee;
+    border-right:1px solid #D4AF37;
 
 }
 
@@ -86,7 +83,7 @@ section[data-testid="stSidebar"] h2 {
 
 
 
-/* REMOVE RADIO CIRCLES */
+/* REMOVE RADIO CIRCLE */
 
 div[role="radiogroup"] label > div:first-child {
 
@@ -95,66 +92,26 @@ div[role="radiogroup"] label > div:first-child {
 }
 
 
-
-/* MENU BUTTONS */
+/* SIDEBAR BUTTONS */
 
 div[role="radiogroup"] label {
 
-    background:#151515;
+    background:#D4AF37 !important;
 
-    border:1px solid #292929;
+    border:1px solid #D4AF37;
 
     border-radius:12px;
 
-    padding:10px 14px;
+    padding:10px 12px;
 
-    margin-bottom:8px;
-
-    transition:0.2s;
+    margin-bottom:10px;
 
 }
 
 
-
-/* NORMAL TEXT */
+/* NORMAL MENU TEXT */
 
 div[role="radiogroup"] label span {
-
-    color:#eeeeee;
-
-    font-weight:500;
-
-}
-
-
-
-/* HOVER */
-
-div[role="radiogroup"] label:hover {
-
-    border-color:#D4AF37;
-
-    background:#1c1c1c;
-
-}
-
-
-
-/* ACTIVE MENU */
-
-div[role="radiogroup"] label:has(input:checked) {
-
-    background:#D4AF37 !important;
-
-    border-color:#D4AF37 !important;
-
-}
-
-
-
-/* ACTIVE TEXT BLACK */
-
-div[role="radiogroup"] label:has(input:checked) span {
 
     color:#000000 !important;
 
@@ -164,7 +121,39 @@ div[role="radiogroup"] label:has(input:checked) span {
 
 
 
-/* HEADERS */
+/* HOVER */
+
+div[role="radiogroup"] label:hover {
+
+    background:#f0c94b !important;
+
+}
+
+
+
+/* ACTIVE MENU */
+
+div[role="radiogroup"] label:has(input:checked) {
+
+    background:#111111 !important;
+
+    border:1px solid #D4AF37 !important;
+
+}
+
+
+
+/* ACTIVE TEXT */
+
+div[role="radiogroup"] label:has(input:checked) span {
+
+    color:#D4AF37 !important;
+
+}
+
+
+
+/* TITLES */
 
 h1,h2,h3 {
 
@@ -174,21 +163,19 @@ h1,h2,h3 {
 
 
 
-/* PLAYER CARDS */
+/* CARDS */
 
 .vip-card {
 
     background:#141414;
 
-    padding:14px;
-
-    border-radius:16px;
-
     border:1px solid rgba(212,175,55,0.35);
 
-    margin-bottom:12px;
+    border-radius:14px;
 
-    box-shadow:0 5px 20px rgba(0,0,0,0.5);
+    padding:12px;
+
+    margin-bottom:10px;
 
 }
 
@@ -198,11 +185,9 @@ h1,h2,h3 {
 
 .small-title {
 
-    font-size:18px;
+    color:#D4AF37;
 
     font-weight:700;
-
-    color:#D4AF37;
 
 }
 
@@ -212,13 +197,11 @@ h1,h2,h3 {
 
 input, textarea {
 
-    background:#141414 !important;
+    background:#111111 !important;
 
     color:white !important;
 
     border:1px solid #333 !important;
-
-    border-radius:10px !important;
 
 }
 
@@ -228,41 +211,19 @@ input, textarea {
 
 div[data-baseweb="select"] > div {
 
-    background:#141414 !important;
+    background:#111111 !important;
 
-    border-radius:10px;
-
-    border-color:#333;
+    border:1px solid #333 !important;
 
 }
 
 
 
-/* TABLE */
+/* TABLE CONTAINER */
 
 div[data-testid="stDataFrame"] {
 
-    background:#111;
-
-    border-radius:14px;
-
-}
-
-
-
-/* BUTTONS */
-
-button {
-
-    border-radius:10px !important;
-
-}
-
-
-
-button:hover {
-
-    border-color:#D4AF37 !important;
+    border-radius:12px;
 
 }
 
