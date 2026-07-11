@@ -1055,11 +1055,11 @@ if menu == "🔍 Player":
 # PROMO ADD
 # ==========================
 
-if menu == "🎁 Promo":
+if menu == "☰ Promo":
 
 
     st.subheader(
-        "🎁 Add Promo"
+        "✚ Add Promo"
     )
 
 
