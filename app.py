@@ -1059,7 +1059,7 @@ if menu == "☰ Promo":
 
 
     st.subheader(
-        "✚ Add Promo"
+        "➕ Add Promo"
     )
 
 
