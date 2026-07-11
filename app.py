@@ -40,274 +40,70 @@ setup_db()
 
 st.markdown("""
 <style>
+/* 1. Importovanje modernog fonta */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700&display=swap');
 
-/* ===== GLOBAL BACKGROUND ===== */
+/* 2. Globalna podešavanja */
+html, body, [class*="css"]  {
+    font-family: 'Inter', sans-serif !important;
+}
 
 .stApp {
-    background:
-    radial-gradient(circle at top left, rgba(212,175,55,0.12), transparent 35%),
-    radial-gradient(circle at bottom right, rgba(255,255,255,0.05), transparent 40%),
-    #050505 !important;
+    background-color: #050505 !important;
+    background-image: radial-gradient(circle at 70% 30%, #1a1a1a 0%, #050505 100%) !important;
 }
 
-
-/* ===== MAIN AREA ===== */
-
+/* 3. Kontejner - Veće dimenzije (kao na slici) */
 .main .block-container {
-
-    max-width: 1200px !important;
-
-    padding-top: 2rem !important;
-    padding-left: 3rem !important;
-    padding-right: 3rem !important;
-
+    max-width: 1300px !important;
+    padding-top: 3rem !important;
+    background: rgba(15, 15, 15, 0.5) !important;
+    border: 1px solid rgba(197, 160, 89, 0.2) !important;
+    border-radius: 20px !important;
+    backdrop-filter: blur(10px) !important;
 }
 
+/* 4. Naslovi - Zlatni Glow i Moderni font */
+h1, h2, h3 {
+    font-family: 'Inter', sans-serif !important;
+    color: #D4AF37 !important;
+    text-shadow: 0 0 10px rgba(212, 175, 55, 0.4) !important;
+    letter-spacing: 2px !important;
+}
 
-/* ===== SIDEBAR LUXURY ===== */
-
-
+/* 5. Sidebar - Luksuzna dimenzija */
 section[data-testid="stSidebar"] {
-
-    background:
-    linear-gradient(
-        180deg,
-        #0b0b0b,
-        #050505
-    ) !important;
-
-    border-right:
-    1px solid rgba(212,175,55,0.35);
-
+    background: rgba(8, 8, 8, 0.9) !important;
+    border-right: 1px solid #C5A059 !important;
+    padding-top: 2rem !important;
 }
 
-
-/* sidebar text */
-
-section[data-testid="stSidebar"] * {
-
-    color:#e8e8e8 !important;
-
+/* 6. Inputi i Polja - Veće dimenzije */
+div[data-baseweb="base-input"] input {
+    height: 50px !important;
+    background: #0a0a0a !important;
+    border: 1px solid #C5A059 !important;
+    color: #fff !important;
+    border-radius: 10px !important;
+    padding-left: 15px !important;
 }
 
-
-/* active menu */
-
-section[data-testid="stSidebar"] div[role="radiogroup"] label {
-
-    border-radius:12px;
-    padding:10px 15px;
-    margin:5px 0;
-
+/* 7. Dugmad - Veća i luksuznija */
+div.stButton > button {
+    height: 50px !important;
+    width: 200px !important;
+    background: linear-gradient(135deg, #C5A059, #8B6508) !important;
+    color: #000 !important;
+    font-weight: 700 !important;
+    border: none !important;
+    border-radius: 8px !important;
+    transition: all 0.3s ease !important;
 }
 
-
-/* active */
-
-section[data-testid="stSidebar"] div[role="radiogroup"] label[data-checked="true"] {
-
-    background:
-    linear-gradient(
-        90deg,
-        #d4af37,
-        #8c6b12
-    ) !important;
-
-    color:black !important;
-
+div.stButton > button:hover {
+    box-shadow: 0 0 20px rgba(197, 160, 89, 0.5) !important;
 }
-
-
-/* ===== TITLES ===== */
-
-
-h1,h2,h3 {
-
-    color:#d4af37 !important;
-
-    font-weight:900 !important;
-
-    letter-spacing:3px !important;
-
-    text-transform:uppercase;
-
-}
-
-
-
-/* small section titles */
-
-
-.small-title {
-
-    color:#d4af37;
-
-    font-size:20px;
-
-    font-weight:800;
-
-    letter-spacing:2px;
-
-    margin-top:25px;
-
-}
-
-
-
-/* ===== INPUTS ===== */
-
-
-.stTextInput input,
-.stSelectbox div[data-baseweb="select"],
-.stMultiSelect div[data-baseweb="select"] {
-
-
-    background:#15151d !important;
-
-    border:
-
-    1px solid rgba(212,175,55,0.35) !important;
-
-
-    border-radius:10px !important;
-
-    color:white !important;
-
-}
-
-
-/* ===== BUTTONS ===== */
-
-
-.stButton button {
-
-
-    background:
-
-    linear-gradient(
-    135deg,
-    #d4af37,
-    #806000
-    ) !important;
-
-
-    color:black !important;
-
-    font-weight:900 !important;
-
-    border-radius:10px !important;
-
-    border:none !important;
-
-}
-
-
-
-.stButton button:hover {
-
-    box-shadow:
-    0 0 25px rgba(212,175,55,0.6);
-
-}
-
-
-
-/* ===== PLAYER CARDS ===== */
-
-
-.vip-card {
-
-
-background:
-
-linear-gradient(
-145deg,
-rgba(255,255,255,0.08),
-rgba(0,0,0,0.5)
-);
-
-
-border:
-
-1px solid rgba(212,175,55,0.35);
-
-
-border-radius:18px;
-
-
-padding:20px;
-
-
-height:90px;
-
-
-box-shadow:
-
-0 10px 30px rgba(0,0,0,0.8);
-
-
-}
-
-
-/* ===== DATAFRAMES ===== */
-
-
-[data-testid="stDataFrame"] {
-
-border-radius:15px !important;
-
-overflow:hidden;
-
-}
-
-
-/* ===== FILE UPLOADER ===== */
-
-
-[data-testid="stFileUploader"] {
-
-
-background:
-
-linear-gradient(
-135deg,
-rgba(212,175,55,0.08),
-rgba(0,0,0,0.6)
-);
-
-
-border:
-
-1px dashed rgba(212,175,55,0.6);
-
-
-border-radius:20px;
-
-
-padding:15px;
-
-
-}
-
-
-/* hide ugly streamlit */
-
-#MainMenu {
-
-visibility:hidden;
-
-}
-
-
-footer {
-
-visibility:hidden;
-
-}
-
-
 </style>
-
 """, unsafe_allow_html=True)
 
 # ==========================
