@@ -40,245 +40,106 @@ setup_db()
 
 st.markdown("""
 <style>
-
 /* =====================
-   GLOBAL
+   GLOBAL - Midnight Luxury
 ===================== */
-
 .stApp {
-    background:#080808 !important;
+    background: linear-gradient(135deg, #0a0a0a 0%, #0f0f0f 100%) !important;
 }
-
 
 .main .block-container {
-
-    max-width:1150px;
-
-    padding-top:1.2rem;
-    padding-left:1.5rem;
-    padding-right:1.5rem;
-
+    max-width: 1150px;
+    padding-top: 2rem;
 }
-
 
 /* =====================
-   SIDEBAR
+   SIDEBAR - Saten & Zlato
 ===================== */
-
 section[data-testid="stSidebar"] {
-
-    background:#0b0b0b !important;
-
-    border-right:1px solid #D4AF37;
-
+    background: #0d0d0d !important;
+    border-right: 1px solid #C5A059 !important;
 }
-
-
-/* Sidebar title */
 
 section[data-testid="stSidebar"] h2 {
-
-    color:#D4AF37 !important;
-
-    font-weight:800;
-
+    color: #C5A059 !important;
+    font-weight: 900;
+    letter-spacing: 1px;
 }
-
-
-/* Remove radio circle */
-
-div[role="radiogroup"] label > div:first-child {
-
-    display:none;
-
-}
-
 
 /* Menu buttons */
-
 div[role="radiogroup"] label {
-
-    background:#D4AF37 !important;
-
-    border-radius:12px;
-
-    border:1px solid #D4AF37;
-
-    padding:11px 14px;
-
-    margin-bottom:10px;
-
+    background: transparent !important;
+    border: 1px solid #C5A059 !important;
+    border-radius: 4px !important;
+    transition: all 0.3s ease !important;
 }
-
-
-/* Menu text */
 
 div[role="radiogroup"] label span {
-
-    color:#000000 !important;
-
-    font-weight:700;
-
+    color: #C5A059 !important;
+    font-weight: 500;
 }
-
-
-
-/* Active page */
-
-div[role="radiogroup"] label:has(input:checked) {
-
-    background:#111111 !important;
-
-    border:1px solid #D4AF37 !important;
-
-}
-
-
-div[role="radiogroup"] label:has(input:checked) span {
-
-    color:#D4AF37 !important;
-
-}
-
-
-
-/* Hover */
 
 div[role="radiogroup"] label:hover {
-
-    transform:scale(1.02);
-
+    background: rgba(197, 160, 89, 0.1) !important;
 }
 
-
-
-/* =====================
-   HEADERS
-===================== */
-
-h1,h2,h3 {
-
-    color:#D4AF37 !important;
-
+div[role="radiogroup"] label:has(input:checked) {
+    background: #C5A059 !important;
 }
 
-
+div[role="radiogroup"] label:has(input:checked) span {
+    color: #000 !important;
+    font-weight: 700;
+}
 
 /* =====================
-   CARDS
+   CARDS - Glassmorphism
 ===================== */
-
 .vip-card {
-
-    background:
-    linear-gradient(
-        145deg,
-        #151515,
-        #0f0f0f
-    );
-
-
-    border:1px solid rgba(212,175,55,0.35);
-
-    border-radius:16px;
-
-    padding:14px;
-
-    box-shadow:
-    0 8px 25px rgba(0,0,0,0.6);
-
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(197, 160, 89, 0.3);
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+    color: #eee;
 }
-
-
-
-/* Section titles */
 
 .small-title {
-
-    color:#D4AF37;
-
-    font-size:18px;
-
-    font-weight:800;
-
+    color: #C5A059;
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 15px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
 }
-
-
 
 /* =====================
-   INPUTS
+   INPUTS & BUTTONS
 ===================== */
-
-input,
-textarea {
-
-    background:#111111 !important;
-
-    color:white !important;
-
-    border:1px solid #333 !important;
-
-    border-radius:10px !important;
-
+input, textarea {
+    background: #0f0f0f !important;
+    border: 1px solid #333 !important;
+    color: #fff !important;
+    border-radius: 6px !important;
 }
-
-
-
-/* Select */
-
-div[data-baseweb="select"] > div {
-
-    background:#111111 !important;
-
-    border-radius:10px;
-
-    border:1px solid #333;
-
-}
-
-
-
-/* =====================
-   BUTTONS
-===================== */
 
 button {
-
-    background:#D4AF37 !important;
-
-    color:#000 !important;
-
-    border-radius:10px !important;
-
-    border:none !important;
-
-    font-weight:700 !important;
-
+    background: #C5A059 !important;
+    color: #000 !important;
+    border-radius: 4px !important;
+    font-weight: 700 !important;
+    transition: transform 0.2s ease !important;
 }
-
 
 button:hover {
-
-    background:#f2ca55 !important;
-
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(197, 160, 89, 0.3);
 }
 
-
-
-/* =====================
-   TABLE
-===================== */
-
-div[data-testid="stDataFrame"] {
-
-    border-radius:14px;
-
-    overflow:hidden;
-
+h1, h2, h3 {
+    color: #C5A059 !important;
 }
-
-
-
 </style>
 """, unsafe_allow_html=True)
 
