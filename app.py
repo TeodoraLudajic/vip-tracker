@@ -426,7 +426,7 @@ menu = st.sidebar.radio(
 uid = ""
 player = pd.DataFrame()
 
-st.title("🎰 VIP")
+st.title("VIP")
 # ==========================
 # UPLOAD MONTH
 # ==========================
