@@ -293,18 +293,10 @@ if menu == "📥 Upload Month":
 
     st.subheader("📥 Upload Monthly Report")
 
-
-    month = st.text_input(
-        "Mesec",
-        placeholder="June 2026"
-    )
-
-
-    file = st.file_uploader(
-        "CSV fajl",
-        type="csv"
-    )
-
+    col1, col2, col3 = st.columns([1, 2, 1]) 
+    with col2: 
+        month = st.text_input("Mesec", placeholder="June 2026")
+        file = st.file_uploader("CSV fajl", type="csv")
 
     if file:
 
