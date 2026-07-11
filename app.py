@@ -275,7 +275,7 @@ menu = st.sidebar.radio(
         "➜] Add Month",
         "☰ Manage Uploads",
         "─୨ৎ─ Promo",
-        "📉 Missing Players"
+        "💢 Missing Players"
     ],
     label_visibility="collapsed"
 )
