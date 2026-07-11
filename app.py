@@ -41,28 +41,29 @@ setup_db()
 st.markdown("""
 <style>
 
-/* WHOLE APP */
+/* =====================
+   GLOBAL
+===================== */
 
 .stApp {
-    background:#090909 !important;
+    background:#080808 !important;
 }
 
 
-/* NARROWER WORK AREA */
-
 .main .block-container {
 
-    max-width:1200px;
+    max-width:1150px;
 
-    padding-top:1.5rem;
+    padding-top:1.2rem;
     padding-left:1.5rem;
     padding-right:1.5rem;
 
 }
 
 
-
-/* SIDEBAR */
+/* =====================
+   SIDEBAR
+===================== */
 
 section[data-testid="stSidebar"] {
 
@@ -73,17 +74,18 @@ section[data-testid="stSidebar"] {
 }
 
 
-/* SIDEBAR TITLE */
+/* Sidebar title */
 
 section[data-testid="stSidebar"] h2 {
 
     color:#D4AF37 !important;
 
+    font-weight:800;
+
 }
 
 
-
-/* REMOVE RADIO CIRCLE */
+/* Remove radio circle */
 
 div[role="radiogroup"] label > div:first-child {
 
@@ -92,24 +94,24 @@ div[role="radiogroup"] label > div:first-child {
 }
 
 
-/* SIDEBAR BUTTONS */
+/* Menu buttons */
 
 div[role="radiogroup"] label {
 
     background:#D4AF37 !important;
 
-    border:1px solid #D4AF37;
-
     border-radius:12px;
 
-    padding:10px 12px;
+    border:1px solid #D4AF37;
+
+    padding:11px 14px;
 
     margin-bottom:10px;
 
 }
 
 
-/* NORMAL MENU TEXT */
+/* Menu text */
 
 div[role="radiogroup"] label span {
 
@@ -121,17 +123,7 @@ div[role="radiogroup"] label span {
 
 
 
-/* HOVER */
-
-div[role="radiogroup"] label:hover {
-
-    background:#f0c94b !important;
-
-}
-
-
-
-/* ACTIVE MENU */
+/* Active page */
 
 div[role="radiogroup"] label:has(input:checked) {
 
@@ -142,9 +134,6 @@ div[role="radiogroup"] label:has(input:checked) {
 }
 
 
-
-/* ACTIVE TEXT */
-
 div[role="radiogroup"] label:has(input:checked) span {
 
     color:#D4AF37 !important;
@@ -153,7 +142,19 @@ div[role="radiogroup"] label:has(input:checked) span {
 
 
 
-/* TITLES */
+/* Hover */
+
+div[role="radiogroup"] label:hover {
+
+    transform:scale(1.02);
+
+}
+
+
+
+/* =====================
+   HEADERS
+===================== */
 
 h1,h2,h3 {
 
@@ -163,39 +164,53 @@ h1,h2,h3 {
 
 
 
-/* CARDS */
+/* =====================
+   CARDS
+===================== */
 
 .vip-card {
 
-    background:#141414;
+    background:
+    linear-gradient(
+        145deg,
+        #151515,
+        #0f0f0f
+    );
+
 
     border:1px solid rgba(212,175,55,0.35);
 
-    border-radius:14px;
+    border-radius:16px;
 
-    padding:12px;
+    padding:14px;
 
-    margin-bottom:10px;
+    box-shadow:
+    0 8px 25px rgba(0,0,0,0.6);
 
 }
 
 
 
-/* SECTION TITLES */
+/* Section titles */
 
 .small-title {
 
     color:#D4AF37;
 
-    font-weight:700;
+    font-size:18px;
+
+    font-weight:800;
 
 }
 
 
 
-/* INPUTS */
+/* =====================
+   INPUTS
+===================== */
 
-input, textarea {
+input,
+textarea {
 
     background:#111111 !important;
 
@@ -203,29 +218,65 @@ input, textarea {
 
     border:1px solid #333 !important;
 
+    border-radius:10px !important;
+
 }
 
 
 
-/* SELECT BOX */
+/* Select */
 
 div[data-baseweb="select"] > div {
 
     background:#111111 !important;
 
-    border:1px solid #333 !important;
+    border-radius:10px;
+
+    border:1px solid #333;
 
 }
 
 
 
-/* TABLE CONTAINER */
+/* =====================
+   BUTTONS
+===================== */
+
+button {
+
+    background:#D4AF37 !important;
+
+    color:#000 !important;
+
+    border-radius:10px !important;
+
+    border:none !important;
+
+    font-weight:700 !important;
+
+}
+
+
+button:hover {
+
+    background:#f2ca55 !important;
+
+}
+
+
+
+/* =====================
+   TABLE
+===================== */
 
 div[data-testid="stDataFrame"] {
 
-    border-radius:12px;
+    border-radius:14px;
+
+    overflow:hidden;
 
 }
+
 
 
 </style>
