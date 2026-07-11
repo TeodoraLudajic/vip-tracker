@@ -41,31 +41,62 @@ setup_db()
 st.markdown("""
 <style>
 
+/* APP BACKGROUND */
+
+html, body, .stApp {
+    background:#090909 !important;
+    color:white;
+}
+
+
 .main .block-container {
-    padding-top: 1rem;
-    padding-left: 2rem;
-    padding-right: 2rem;
+
+    padding-top:1rem;
+    padding-left:2rem;
+    padding-right:2rem;
+
 }
 
 
 /* SIDEBAR */
 
 section[data-testid="stSidebar"] {
-    background: linear-gradient(
-        180deg,
-        #111111,
-        #080808
-    );
-    border-right: 1px solid rgba(212,175,55,0.3);
+
+    background:#0d0d0d !important;
+
+    border-right:1px solid rgba(212,175,55,0.5);
+
 }
 
 
 section[data-testid="stSidebar"] * {
+
     color:#eeeeee;
+
 }
 
 
-/* MENU */
+/* SIDEBAR TITLE */
+
+section[data-testid="stSidebar"] h2 {
+
+    color:#D4AF37 !important;
+
+}
+
+
+
+/* REMOVE RADIO CIRCLES */
+
+div[role="radiogroup"] label > div:first-child {
+
+    display:none;
+
+}
+
+
+
+/* MENU BUTTONS */
 
 div[role="radiogroup"] label {
 
@@ -73,23 +104,67 @@ div[role="radiogroup"] label {
 
     border:1px solid #292929;
 
-    border-radius:10px;
+    border-radius:12px;
 
-    padding:8px 12px;
+    padding:10px 14px;
 
     margin-bottom:8px;
 
+    transition:0.2s;
+
 }
 
+
+
+/* NORMAL TEXT */
+
+div[role="radiogroup"] label span {
+
+    color:#eeeeee;
+
+    font-weight:500;
+
+}
+
+
+
+/* HOVER */
 
 div[role="radiogroup"] label:hover {
 
     border-color:#D4AF37;
 
+    background:#1c1c1c;
+
 }
 
 
-/* TITLES */
+
+/* ACTIVE MENU */
+
+div[role="radiogroup"] label:has(input:checked) {
+
+    background:#D4AF37 !important;
+
+    border-color:#D4AF37 !important;
+
+}
+
+
+
+/* ACTIVE TEXT BLACK */
+
+div[role="radiogroup"] label:has(input:checked) span {
+
+    color:#000000 !important;
+
+    font-weight:700;
+
+}
+
+
+
+/* HEADERS */
 
 h1,h2,h3 {
 
@@ -98,21 +173,25 @@ h1,h2,h3 {
 }
 
 
+
 /* PLAYER CARDS */
 
 .vip-card {
 
-    background:#151515;
+    background:#141414;
 
-    padding:12px;
+    padding:14px;
 
-    border-radius:14px;
+    border-radius:16px;
 
-    border:1px solid rgba(212,175,55,0.3);
+    border:1px solid rgba(212,175,55,0.35);
 
-    margin-bottom:10px;
+    margin-bottom:12px;
+
+    box-shadow:0 5px 20px rgba(0,0,0,0.5);
 
 }
+
 
 
 /* SECTION TITLES */
@@ -128,6 +207,7 @@ h1,h2,h3 {
 }
 
 
+
 /* INPUTS */
 
 input, textarea {
@@ -136,14 +216,53 @@ input, textarea {
 
     color:white !important;
 
+    border:1px solid #333 !important;
+
+    border-radius:10px !important;
+
 }
+
+
+
+/* SELECT BOX */
+
+div[data-baseweb="select"] > div {
+
+    background:#141414 !important;
+
+    border-radius:10px;
+
+    border-color:#333;
+
+}
+
 
 
 /* TABLE */
 
 div[data-testid="stDataFrame"] {
 
-    border-radius:12px;
+    background:#111;
+
+    border-radius:14px;
+
+}
+
+
+
+/* BUTTONS */
+
+button {
+
+    border-radius:10px !important;
+
+}
+
+
+
+button:hover {
+
+    border-color:#D4AF37 !important;
 
 }
 
