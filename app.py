@@ -311,14 +311,15 @@ st.sidebar.title("👑 VIP BO")
 
 
 menu = st.sidebar.radio(
-    "",
+    "Navigacija",
     [
         "🔍 Player",
         "📥 Upload Month",
         "🗂 Manage Uploads",
         "🎁 Promo",
         "📉 Missing Players"
-    ]
+    ],
+    label_visibility="collapsed"
 )
 
 
