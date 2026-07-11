@@ -1032,7 +1032,7 @@ if menu == "🔍 Player":
 
 
         if st.button(
-            "💾 Save"
+            "💾 Save Changes"
         ):
 
 
