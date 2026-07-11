@@ -40,105 +40,67 @@ setup_db()
 
 st.markdown("""
 <style>
-/* =====================
-   GLOBAL - Midnight Luxury
-===================== */
+/* Globalni Obsidian luksuz */
 .stApp {
-    background: linear-gradient(135deg, #0a0a0a 0%, #0f0f0f 100%) !important;
+    background: radial-gradient(circle at top right, #1a1a1a, #050505) !important;
+    background-image: url('https://www.transparenttextures.com/patterns/black-marble.png') !important;
 }
 
-.main .block-container {
-    max-width: 1150px;
-    padding-top: 2rem;
-}
-
-/* =====================
-   SIDEBAR - Saten & Zlato
-===================== */
+/* Sidebar redizajn */
 section[data-testid="stSidebar"] {
-    background: #0d0d0d !important;
+    background: rgba(10, 10, 10, 0.8) !important;
+    backdrop-filter: blur(15px);
     border-right: 1px solid #C5A059 !important;
 }
 
-section[data-testid="stSidebar"] h2 {
-    color: #C5A059 !important;
-    font-weight: 900;
-    letter-spacing: 1px;
-}
-
-/* Menu buttons */
-div[role="radiogroup"] label {
-    background: transparent !important;
-    border: 1px solid #C5A059 !important;
-    border-radius: 4px !important;
-    transition: all 0.3s ease !important;
-}
-
-div[role="radiogroup"] label span {
-    color: #C5A059 !important;
-    font-weight: 500;
-}
-
-div[role="radiogroup"] label:hover {
-    background: rgba(197, 160, 89, 0.1) !important;
-}
-
-div[role="radiogroup"] label:has(input:checked) {
-    background: #C5A059 !important;
-}
-
-div[role="radiogroup"] label:has(input:checked) span {
-    color: #000 !important;
-    font-weight: 700;
-}
-
-/* =====================
-   CARDS - Glassmorphism
-===================== */
+/* Glassmorphism kartice */
 .vip-card {
-    background: rgba(255, 255, 255, 0.03);
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(197, 160, 89, 0.3);
-    border-radius: 12px;
-    padding: 20px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.5);
-    color: #eee;
+    background: rgba(20, 20, 20, 0.6) !important;
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(197, 160, 89, 0.4) !important;
+    border-radius: 15px !important;
+    padding: 20px !important;
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.8) !important;
+    color: #e0e0e0 !important;
+    margin-bottom: 20px;
 }
 
-.small-title {
-    color: #C5A059;
-    font-size: 20px;
-    font-weight: 700;
-    margin-bottom: 15px;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-}
-
-/* =====================
-   INPUTS & BUTTONS
-===================== */
-input, textarea {
-    background: #0f0f0f !important;
-    border: 1px solid #333 !important;
-    color: #fff !important;
-    border-radius: 6px !important;
-}
-
-button {
-    background: #C5A059 !important;
-    color: #000 !important;
-    border-radius: 4px !important;
+/* Zlatni glow efekti */
+h1, h2, h3, .small-title {
+    color: #D4AF37 !important;
+    text-shadow: 0 0 10px rgba(197, 160, 89, 0.5) !important;
     font-weight: 700 !important;
-    transition: transform 0.2s ease !important;
+    text-transform: uppercase;
+    letter-spacing: 2px !important;
+}
+
+/* Input polja */
+.stTextInput input, .stSelectbox div {
+    background: rgba(0, 0, 0, 0.3) !important;
+    border: 1px solid #C5A059 !important;
+    border-radius: 8px !important;
+    color: #fff !important;
+}
+
+/* Premium dugmad */
+button {
+    background: linear-gradient(45deg, #C5A059, #8B6508) !important;
+    color: #000 !important;
+    font-weight: 800 !important;
+    border: none !important;
+    border-radius: 8px !important;
+    transition: 0.3s !important;
 }
 
 button:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 10px rgba(197, 160, 89, 0.3);
+    transform: scale(1.05);
+    box-shadow: 0 0 20px rgba(197, 160, 89, 0.6) !important;
 }
 
-h1, h2, h3 {
-    color: #C5A059 !important;
+/* Dataframe stajling */
+[data-testid="stDataFrame"] {
+    border: 1px solid #C5A059 !important;
+    border-radius: 10px !important;
 }
 </style>
 """, unsafe_allow_html=True)
