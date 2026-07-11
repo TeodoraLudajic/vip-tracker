@@ -590,38 +590,43 @@ if menu == "📉 Missing Players":
 # ==========================
 
 if menu == "🔍 Player":
+    st.subheader("🔍 Search Player")
+    
+    col1, col2 = st.columns([2, 1]) 
+    with col1:
+        uid = st.text_input("UID", placeholder="Unesi UID")
+    with col2:
+        st.markdown("<br>", unsafe_allow_html=True) 
+        search_btn = st.button("🔍 Search")
 
-
-    st.subheader(
-        "🔍 Search Player"
-    )
-
-
-    uid = st.text_input(
-        "UID",
-        placeholder="Unesi UID"
-    )
-
-
-    if uid:
-
-
+    if uid or search_btn:
         player = get_player(uid)
-
-
         if player.empty:
-
-            st.warning(
-                "Igrač nije pronađen"
-            )
-
-
+            st.warning("Igrač nije pronađen")
         else:
-
-
             p = player.iloc[0]
+            
+            st.markdown("---")
+            c1, c2, c3 = st.columns(3)
+            with c1: st.metric("UID", p['uid'])
+            with c2: st.metric("Brand", p['brand'])
+            with c3: st.metric("Reward", p['reward'] if p['reward'] else "-")
+            
+            st.subheader("✏️ Edit Player")
+            edit_c1, edit_c2 = st.columns(2)
+            
+            with edit_c1:
+                closure = st.selectbox("Closure", ["", "Yes", "No"], index=["","Yes","No"].index(p['closure']) if p['closure'] in ["","Yes","No"] else 0)
+            with edit_c2:
+                reward = st.multiselect("Reward Preference", ["Cashback", "Bonus", "Free Spins"], default=p['reward'].split(",") if p['reward'] else [])
+            
+            tags = st.multiselect("Tags", ["Bonus Hunter", "Chargeback", "Closure Risk", "High Depositor"], default=p['tags'].split(",") if p['tags'] else [])
+            notes = st.text_area("Notes", value=p['notes'] if p['notes'] else "")
 
-
+            if st.button("💾 Save Changes"):
+                save_player(uid, p['brand'], closure, ",".join(reward), ",".join(tags), notes)
+                st.success("Sačuvano!")
+                st.rerun()
 
             # -------------------
             # PLAYER CARD
