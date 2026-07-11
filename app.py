@@ -440,6 +440,9 @@ if menu == "🗂 Manage Uploads":
         conn
     )
 
+    if uploads.empty:
+        st.info("No monthly reports have been uploaded yet.")
+        st.stop()
 
     st.dataframe(
         uploads,
