@@ -772,7 +772,7 @@ if menu == "👤 Player":
             st.markdown(
                 """
                 <div class="small-title">
-                🎁 Promo History
+                ➕ Promo History
                 </div>
                 """,
                 unsafe_allow_html=True
