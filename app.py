@@ -472,7 +472,7 @@ if menu == "☰ Manage Uploads":
 # MISSING PLAYERS
 # ==========================
 
-if menu == "📉 Missing Players":
+if menu == "💢 Missing Players":
 
     st.subheader("📉 Players Missing From Current Month")
 
