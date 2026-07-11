@@ -313,8 +313,22 @@ def get_promo(uid):
     )
 
 
+st.sidebar.markdown("""
+<h2 style="
+color:#D4AF37;
+text-align:center;
+">
+👑 VIP BO
+</h2>
 
-st.sidebar.title("👑 VIP BO")
+<p style="
+color:#888;
+text-align:center;
+font-size:12px;
+">
+VIP Management System
+</p>
+""", unsafe_allow_html=True)
 
 
 menu = st.sidebar.radio(
