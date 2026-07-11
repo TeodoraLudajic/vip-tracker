@@ -48,60 +48,108 @@ st.markdown("""
 }
 
 
-.vip-card {
+/* SIDEBAR */
 
-    background-color:#181818;
-
-    padding:6px;
-
-    border-radius:12px;
-
-    border:1px solid #333;
-
-    margin-bottom:10px;
-
+section[data-testid="stSidebar"] {
+    background: linear-gradient(
+        180deg,
+        #111111,
+        #080808
+    );
+    border-right: 1px solid rgba(212,175,55,0.3);
 }
 
 
-.small-title {
+section[data-testid="stSidebar"] * {
+    color:#eeeeee;
+}
 
-    font-size:18px;
 
-    font-weight:600;
+/* MENU */
+
+div[role="radiogroup"] label {
+
+    background:#151515;
+
+    border:1px solid #292929;
+
+    border-radius:10px;
+
+    padding:8px 12px;
 
     margin-bottom:8px;
 
 }
 
 
-.badge {
+div[role="radiogroup"] label:hover {
 
-    display:inline-block;
-
-    background:#303030;
-
-    padding:4px 10px;
-
-    border-radius:15px;
-
-    margin:2px;
-
-    font-size:13px;
+    border-color:#D4AF37;
 
 }
 
 
+/* TITLES */
+
+h1,h2,h3 {
+
+    color:#D4AF37 !important;
+
+}
+
+
+/* PLAYER CARDS */
+
+.vip-card {
+
+    background:#151515;
+
+    padding:12px;
+
+    border-radius:14px;
+
+    border:1px solid rgba(212,175,55,0.3);
+
+    margin-bottom:10px;
+
+}
+
+
+/* SECTION TITLES */
+
+.small-title {
+
+    font-size:18px;
+
+    font-weight:700;
+
+    color:#D4AF37;
+
+}
+
+
+/* INPUTS */
+
+input, textarea {
+
+    background:#141414 !important;
+
+    color:white !important;
+
+}
+
+
+/* TABLE */
+
 div[data-testid="stDataFrame"] {
 
-    height:auto;
+    border-radius:12px;
 
 }
 
 
 </style>
 """, unsafe_allow_html=True)
-
-
 
 # ==========================
 # FUNCTIONS
