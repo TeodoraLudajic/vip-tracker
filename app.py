@@ -480,7 +480,6 @@ if menu == "📉 Missing Players":
 
     st.subheader("📉 Players Missing From Current Month")
 
-
     months = pd.read_sql(
         """
         SELECT DISTINCT month
@@ -489,7 +488,12 @@ if menu == "📉 Missing Players":
         conn
     )["month"].tolist()
 
+    
+    if not months:
+        st.info("No monthly reports have been uploaded yet.")
+        st.stop()
 
+    
     selected_month = st.selectbox(
         "Mesec",
         months
