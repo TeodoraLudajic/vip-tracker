@@ -40,67 +40,69 @@ setup_db()
 
 st.markdown("""
 <style>
-/* Globalni Obsidian luksuz */
+/* 1. Pozadina i glavni kontejner */
 .stApp {
-    background: radial-gradient(circle at top right, #1a1a1a, #050505) !important;
-    background-image: url('https://www.transparenttextures.com/patterns/black-marble.png') !important;
+    background: #050505 !important;
+    background-image: radial-gradient(circle at 50% 50%, #1a1a1a 0%, #050505 100%) !important;
 }
 
-/* Sidebar redizajn */
-section[data-testid="stSidebar"] {
-    background: rgba(10, 10, 10, 0.8) !important;
-    backdrop-filter: blur(15px);
-    border-right: 1px solid #C5A059 !important;
+/* 2. Uklanjanje belina i postavljanje luksuznog okvira */
+.main .block-container {
+    background: rgba(10, 10, 10, 0.4);
+    border: 1px solid rgba(197, 160, 89, 0.2);
+    border-radius: 20px;
+    padding: 3rem !important;
+    margin-top: 2rem;
 }
 
-/* Glassmorphism kartice */
-.vip-card {
-    background: rgba(20, 20, 20, 0.6) !important;
-    backdrop-filter: blur(12px);
-    border: 1px solid rgba(197, 160, 89, 0.4) !important;
-    border-radius: 15px !important;
-    padding: 20px !important;
-    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.8) !important;
-    color: #e0e0e0 !important;
-    margin-bottom: 20px;
-}
-
-/* Zlatni glow efekti */
+/* 3. Zlatni tekst sa Glow efektom */
 h1, h2, h3, .small-title {
     color: #D4AF37 !important;
-    text-shadow: 0 0 10px rgba(197, 160, 89, 0.5) !important;
-    font-weight: 700 !important;
-    text-transform: uppercase;
-    letter-spacing: 2px !important;
-}
-
-/* Input polja */
-.stTextInput input, .stSelectbox div {
-    background: rgba(0, 0, 0, 0.3) !important;
-    border: 1px solid #C5A059 !important;
-    border-radius: 8px !important;
-    color: #fff !important;
-}
-
-/* Premium dugmad */
-button {
-    background: linear-gradient(45deg, #C5A059, #8B6508) !important;
-    color: #000 !important;
+    text-shadow: 0 0 15px rgba(212, 175, 55, 0.6) !important;
     font-weight: 800 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 3px !important;
+}
+
+/* 4. Glassmorphism za sve panele/kartice */
+div[data-testid="stExpander"], .vip-card {
+    background: rgba(255, 255, 255, 0.03) !important;
+    backdrop-filter: blur(20px) !important;
+    border: 1px solid rgba(197, 160, 89, 0.5) !important;
+    border-radius: 15px !important;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5) !important;
+}
+
+/* 5. Premium dugmad (Glow i Hover) */
+div.stButton > button {
+    background: linear-gradient(135deg, #C5A059 0%, #8B6508 100%) !important;
+    color: #000 !important;
     border: none !important;
-    border-radius: 8px !important;
-    transition: 0.3s !important;
+    padding: 10px 25px !important;
+    border-radius: 50px !important;
+    font-weight: 900 !important;
+    text-transform: uppercase !important;
+    transition: all 0.4s ease !important;
+    box-shadow: 0 0 15px rgba(197, 160, 89, 0.4) !important;
 }
 
-button:hover {
-    transform: scale(1.05);
-    box-shadow: 0 0 20px rgba(197, 160, 89, 0.6) !important;
+div.stButton > button:hover {
+    transform: translateY(-3px) scale(1.05) !important;
+    box-shadow: 0 0 25px rgba(197, 160, 89, 0.8) !important;
 }
 
-/* Dataframe stajling */
-[data-testid="stDataFrame"] {
+/* 6. Sidebar redizajn */
+section[data-testid="stSidebar"] {
+    background: linear-gradient(to bottom, #0a0a0a, #151515) !important;
+    border-right: 2px solid #C5A059 !important;
+}
+
+/* 7. Input polja */
+input {
+    background: rgba(0, 0, 0, 0.5) !important;
     border: 1px solid #C5A059 !important;
-    border-radius: 10px !important;
+    color: #D4AF37 !important;
+    border-radius: 8px !important;
 }
 </style>
 """, unsafe_allow_html=True)
