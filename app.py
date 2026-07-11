@@ -40,67 +40,65 @@ setup_db()
 
 st.markdown("""
 <style>
-/* 1. Mermerna pozadina za ceo app */
+/* 1. Luksuzna Mermerna Podloga */
 .stApp {
-    background: radial-gradient(circle at 50% 50%, #1a1a1a 0%, #050505 100%) !important;
+    background-color: #050505 !important;
     background-image: url('https://www.transparenttextures.com/patterns/black-marble.png') !important;
+    background-size: cover !important;
 }
 
-/* 2. Glavni kontejner sa staklenim efektom */
+/* 2. Centralni Kontejner - Executive Look */
 .main .block-container {
-    background: rgba(10, 10, 10, 0.6) !important;
-    backdrop-filter: blur(20px) !important;
-    border: 1px solid rgba(197, 160, 89, 0.3) !important;
-    border-radius: 25px !important;
-    padding: 3rem !important;
+    background: rgba(20, 20, 20, 0.7) !important;
+    backdrop-filter: blur(25px) !important;
+    border: 1px solid rgba(197, 160, 89, 0.4) !important;
+    border-radius: 20px !important;
+    padding: 40px !important;
     box-shadow: 0 10px 50px rgba(0,0,0,0.9) !important;
 }
 
-/* 3. Zlatni Glow naslovi */
-h1, h2, h3, .st-emotion-cache-1wivap2 {
+/* 3. Zlatni Naslovi sa Glow efektom */
+h1, h2, h3, .small-title {
     color: #D4AF37 !important;
-    text-shadow: 0 0 15px rgba(212, 175, 55, 0.5) !important;
-    font-weight: 800 !important;
+    text-shadow: 0 0 15px rgba(212, 175, 55, 0.8) !important;
+    font-weight: 900 !important;
     text-transform: uppercase !important;
-    letter-spacing: 3px !important;
+    letter-spacing: 4px !important;
 }
 
-/* 4. Sidebar stilizacija */
+/* 4. Sidebar - Elegantni Terminal */
 section[data-testid="stSidebar"] {
-    background: rgba(5, 5, 5, 0.95) !important;
+    background: rgba(10, 10, 10, 0.95) !important;
     border-right: 2px solid #C5A059 !important;
 }
 
-/* 5. Input polja - tanke zlatne linije */
-div[data-baseweb="base-input"] {
-    background: rgba(0, 0, 0, 0.5) !important;
+/* 5. Inputi - Zlatni border */
+.stTextInput > div > div > input, 
+.stSelectbox > div > div > div {
+    background: rgba(0, 0, 0, 0.6) !important;
     border: 1px solid #C5A059 !important;
-    border-radius: 12px !important;
+    border-radius: 8px !important;
+    color: #fff !important;
 }
 
-/* 6. Premium Dugmad (Zlatni gradijent) */
-div.stButton > button {
-    background: linear-gradient(135deg, #C5A059 0%, #8B6508 100%) !important;
+/* 6. Premium Dugmad - Zlatni gradijent */
+button {
+    background: linear-gradient(135deg, #C5A059, #8B6508) !important;
     color: #000 !important;
-    font-weight: 900 !important;
+    font-weight: 800 !important;
     border: none !important;
-    border-radius: 50px !important;
-    padding: 10px 30px !important;
-    transition: all 0.4s ease !important;
-    box-shadow: 0 4px 15px rgba(197, 160, 89, 0.3) !important;
+    border-radius: 6px !important;
+    transition: all 0.3s ease !important;
 }
 
-div.stButton > button:hover {
-    transform: scale(1.05) !important;
-    box-shadow: 0 0 25px rgba(197, 160, 89, 0.6) !important;
+button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 25px rgba(197, 160, 89, 0.7) !important;
 }
 
-/* 7. Dataframe / Tabele */
-[data-testid="stDataFrame"] {
-    border: 1px solid #C5A059 !important;
-    border-radius: 15px !important;
-    overflow: hidden !important;
-}
+/* 7. Uklanjanje sitnih Streamlit detalja */
+#MainMenu, footer { visibility: hidden !important; }
+header { visibility: hidden !important; }
 </style>
 """, unsafe_allow_html=True)
 
