@@ -611,58 +611,20 @@ if menu == "📉 Missing Players":
                 last_seen["Brand"] == selected_brand
             ]
 
-        
-        last_seen = last_seen.head(200)
+        last_seen = last_seen.head(50)
 
-
-        for _, row in last_seen.iterrows():
-
-            col1, col2, col3 = st.columns([1, 1, 2])
-
-            with col1:
-                st.write(row["month"])
-
-            with col2:
-                st.write(row.get("Brand", ""))
-
-            with col3:
-                components.html(
-                    f"""
-                    <div style="display:flex;align-items:center;gap:8px;">
-
-                        <span style="
-                            color: white;
-                            font-size: 14px;
-                            font-weight: 400;
-                        ">
-                            {row["uid"]}
-                        </span>
-
-                        <button
-                            onclick="
-                                navigator.clipboard.writeText('{row['uid']}');
-                                this.innerHTML='✔';
-                                setTimeout(() => {{
-                                    this.innerHTML='⧉';
-                                }},1500);
-                            "
-                            style="
-                                background:#111827;
-                                color:white;
-                                border:none;
-                                border-radius:6px;
-                                width:28px;
-                                height:28px;
-                                cursor:pointer;
-                                font-size:15px;
-                            ">
-                            ⧉
-                        </button>
-                    </div>
-                    """,
-                    height=26,
+        st.dataframe(
+            last_seen[["month", "Brand", "uid"]],
+            column_config={
+                "uid": st.column_config.TextColumn(
+                    "UID",
+                    help="Klikni na dugme za kopiranje",
+                    copy_value=True
                 )
-
+            },
+            use_container_width=True,
+            hide_index=True
+        )
         
 # ==========================
 # PLAYER PAGE
