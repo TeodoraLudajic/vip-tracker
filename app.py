@@ -474,7 +474,7 @@ if menu == "☰ Manage Uploads":
 
 if menu == "💢 Missing Players":
 
-    st.subheader("📉 Players Missing From Current Month")
+    st.subheader("💢 Players Missing From Current Month")
 
     months = pd.read_sql(
         """
