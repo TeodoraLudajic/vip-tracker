@@ -288,7 +288,7 @@ st.title("VIP")
 # UPLOAD MONTH
 # ==========================
 
-if menu == "📥 Upload Month":
+if menu == "➜] Add Month":
 
     st.subheader("📥 Upload Monthly Report")
 
