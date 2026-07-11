@@ -37,71 +37,53 @@ setup_db()
 # ==========================
 # STYLE
 # ==========================
-
 st.markdown("""
 <style>
-/* 1. Importovanje modernog fonta */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700&display=swap');
-
-/* 2. Globalna podešavanja */
-html, body, [class*="css"]  {
-    font-family: 'Inter', sans-serif !important;
-}
-
+/* 1. Mermerna pozadina */
 .stApp {
     background-color: #050505 !important;
     background-image: radial-gradient(circle at 70% 30%, #1a1a1a 0%, #050505 100%) !important;
 }
 
-/* 3. Kontejner - Veće dimenzije (kao na slici) */
+/* 2. Glavni kontejner - "VIP Kartica" izgled */
 .main .block-container {
-    max-width: 1300px !important;
-    padding-top: 3rem !important;
-    background: rgba(15, 15, 15, 0.5) !important;
-    border: 1px solid rgba(197, 160, 89, 0.2) !important;
+    background: rgba(15, 15, 15, 0.7) !important;
+    backdrop-filter: blur(15px) !important;
+    border: 1px solid rgba(197, 160, 89, 0.3) !important;
     border-radius: 20px !important;
-    backdrop-filter: blur(10px) !important;
+    padding: 3rem !important;
 }
 
-/* 4. Naslovi - Zlatni Glow i Moderni font */
+/* 3. Zlatni Glow naslovi */
 h1, h2, h3 {
-    font-family: 'Inter', sans-serif !important;
     color: #D4AF37 !important;
-    text-shadow: 0 0 10px rgba(212, 175, 55, 0.4) !important;
-    letter-spacing: 2px !important;
+    text-shadow: 0 0 10px rgba(212, 175, 55, 0.6) !important;
+    text-transform: uppercase;
+    letter-spacing: 3px !important;
 }
 
-/* 5. Sidebar - Luksuzna dimenzija */
+/* 4. Sidebar */
 section[data-testid="stSidebar"] {
-    background: rgba(8, 8, 8, 0.9) !important;
+    background: rgba(10, 10, 10, 0.95) !important;
     border-right: 1px solid #C5A059 !important;
-    padding-top: 2rem !important;
 }
 
-/* 6. Inputi i Polja - Veće dimenzije */
-div[data-baseweb="base-input"] input {
-    height: 50px !important;
+/* 5. Inputi - luksuzna ivica */
+.stTextInput > div > div > input {
     background: #0a0a0a !important;
     border: 1px solid #C5A059 !important;
     color: #fff !important;
-    border-radius: 10px !important;
-    padding-left: 15px !important;
+    border-radius: 8px !important;
 }
 
-/* 7. Dugmad - Veća i luksuznija */
+/* 6. Dugmad */
 div.stButton > button {
-    height: 50px !important;
-    width: 200px !important;
     background: linear-gradient(135deg, #C5A059, #8B6508) !important;
     color: #000 !important;
-    font-weight: 700 !important;
+    font-weight: 800 !important;
     border: none !important;
-    border-radius: 8px !important;
-    transition: all 0.3s ease !important;
-}
-
-div.stButton > button:hover {
-    box-shadow: 0 0 20px rgba(197, 160, 89, 0.5) !important;
+    border-radius: 6px !important;
+    transition: 0.3s !important;
 }
 </style>
 """, unsafe_allow_html=True)
