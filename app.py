@@ -281,6 +281,8 @@ menu = st.sidebar.radio(
     label_visibility="collapsed"
 )
 
+uid = ""
+player = pd.DataFrame()
 
 st.title("🎰 VIP Back Office")
 # ==========================
