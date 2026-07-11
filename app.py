@@ -590,7 +590,7 @@ if menu == "📉 Missing Players":
 # ==========================
 
 if menu == "🔍 Player":
-    st.subheader("🔍 Search Player")
+    st.subheader("🔍︎ Search Player")
     
     col1, col2 = st.columns([2, 1]) 
     with col1:
