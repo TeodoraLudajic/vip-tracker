@@ -2,6 +2,7 @@ import streamlit as st
 import pandas as pd
 import sqlite3
 import streamlit.components.v1 as components
+import os
 
 # ==========================
 # CONFIG
@@ -13,67 +14,25 @@ st.set_page_config(
     layout="wide"
 )
 
-
-DB = "vip_podaci.db"
-
-
 # ==========================
 # DATABASE
 # ==========================
 
-conn = sqlite3.connect(
-    DB,
-    check_same_thread=False
-)
+DB_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), "vip_podaci.db")
 
+conn = sqlite3.connect(DB_PATH, check_same_thread=False)
 cur = conn.cursor()
 
-
 def setup_db():
-
-    cur.execute("""
-    CREATE TABLE IF NOT EXISTS players (
-        uid TEXT PRIMARY KEY,
-        brand TEXT,
-        closure TEXT DEFAULT '',
-        reward TEXT DEFAULT '',
-        tags TEXT DEFAULT '',
-        notes TEXT DEFAULT ''
-    )
-    """)
-
-
-    cur.execute("""
-    CREATE TABLE IF NOT EXISTS monthly (
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
-        uid TEXT,
-        month TEXT,
-        deposit TEXT,
-        segment TEXT,
-        status TEXT,
-        notes TEXT DEFAULT ''
-    )
-    """)
-
-
-    cur.execute("""
-    CREATE TABLE IF NOT EXISTS promo (
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
-        uid TEXT,
-        month TEXT,
-        promo_type TEXT,
-        amount TEXT,
-        notes TEXT DEFAULT ''
-    )
-    """)
-
-
-    conn.commit()
-
+    try:
+        cur.execute("CREATE TABLE IF NOT EXISTS players (uid TEXT PRIMARY KEY, brand TEXT, closure TEXT DEFAULT '', reward TEXT DEFAULT '', tags TEXT DEFAULT '', notes TEXT DEFAULT '')")
+        cur.execute("CREATE TABLE IF NOT EXISTS monthly (id INTEGER PRIMARY KEY AUTOINCREMENT, uid TEXT, month TEXT, deposit TEXT, segment TEXT, status TEXT, notes TEXT DEFAULT '')")
+        cur.execute("CREATE TABLE IF NOT EXISTS promo (id INTEGER PRIMARY KEY AUTOINCREMENT, uid TEXT, month TEXT, promo_type TEXT, amount TEXT, notes TEXT DEFAULT '')")
+        conn.commit()
+    except Exception as e:
+        st.error(f"Problem sa bazom: {e}")
 
 setup_db()
-
-
 
 # ==========================
 # STYLE
