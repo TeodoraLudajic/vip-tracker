@@ -356,10 +356,7 @@ if menu == "➜] Add Month":
 
                 for _, row in df.iterrows():
 
-                    uid = str(
-                        int(row["customer_id"])
-                    )
-
+                    uid = str(int(float(row["customer_id"])))
 
                     cur.execute(
                         """
