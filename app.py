@@ -301,6 +301,7 @@ if menu == "➜] Add Month":
 
         df = pd.read_csv(file)
 
+        df["customer_id"] = df["customer_id"].astype(float).astype(int).astype(str)
 
         with st.expander("Preview fajla"):
 
