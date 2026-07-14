@@ -569,20 +569,19 @@ if menu == "💢 Missing Players":
             ]
 
         last_seen = last_seen.head(50)
+        
         prikaz = last_seen.reset_index()
 
-        st.data_editor(
-            prikaz[["month", "Brand", "uid"]],
-            column_config={
-                "uid": st.column_config.TextColumn(
-                    "UID",
-                    help="Samo klikni na UID i kopiraj ga!",
-                    disabled=True 
-                )
-            },
-            use_container_width=True,
-            hide_index=True
-        )
+        for i, row in prikaz.iterrows():
+            c1, c2, c3, c4 = st.columns([1, 1, 1, 1])
+            with c1: st.write(row['month'])
+            with c2: st.write(row['Brand'])
+            with c3: st.text(row['uid'])
+            with c4:
+
+                if st.button(f"📋 Kopiraj", key=f"btn_{i}"):
+                    st.write(f'<script>navigator.clipboard.writeText("{row["uid"]}")</script>', unsafe_allow_html=True)
+                    st.toast(f"Kopirano: {row['uid']}")
         
 # ==========================
 # PLAYER PAGE
