@@ -572,16 +572,17 @@ if menu == "💢 Missing Players":
         
         prikaz = last_seen.reset_index()
 
-        for i, row in prikaz.iterrows():
-            c1, c2, c3, c4 = st.columns([1, 1, 1, 1])
-            with c1: st.write(row['month'])
-            with c2: st.write(row['Brand'])
-            with c3: st.text(row['uid'])
-            with c4:
-
-                if st.button(f"Copy", key=f"btn_{i}"):
-                    st.write(f'<script>navigator.clipboard.writeText("{row["uid"]}")</script>', unsafe_allow_html=True)
-                    st.toast(f"Kopirano: {row['uid']}")
+        for index, row in prikaz.iterrows():
+            col1, col2, col3 = st.columns([2, 2, 3])
+            
+            with col1:
+                st.write(f"📅 {row['month']}")
+                
+            with col2:
+                st.write(f"🎰 {row['Brand']}")
+                
+            with col3:
+                st.code(str(row['uid']), language=None)
         
 # ==========================
 # PLAYER PAGE
