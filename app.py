@@ -572,13 +572,6 @@ if menu == "💢 Missing Players":
 
         st.dataframe(
             last_seen[["month", "Brand", "uid"]],
-            column_config={
-                "uid": st.column_config.TextColumn(
-                    "UID",
-                    help="Klikni na dugme za kopiranje",
-                    copy_value=True
-                )
-            },
             use_container_width=True,
             hide_index=True
         )
