@@ -570,15 +570,10 @@ if menu == "💢 Missing Players":
 
         last_seen = last_seen.head(50)
 
-        df_to_show = last_seen.reset_index()
-
         prikaz = last_seen.reset_index()
         
         st.dataframe(
-            prikaz,
-            column_config={
-                "uid": st.column_config.TextColumn("UID", copy_value=True)
-            },
+            prikaz[["month", "Brand", "uid"]],
             use_container_width=True,
             hide_index=True
         )
