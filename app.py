@@ -573,13 +573,13 @@ if menu == "💢 Missing Players":
         prikaz = last_seen.reset_index()
 
         for index, row in prikaz.iterrows():
-            col1, col2, col3 = st.columns([2, 2, 3])
+            col1, col2, col3 = st.columns([2, 2, 2])
             
             with col1:
-                st.write(f"📅 {row['month']}")
+                st.write(f"{row['month']}")
                 
             with col2:
-                st.write(f"🎰 {row['Brand']}")
+                st.write(f"{row['Brand']}")
                 
             with col3:
                 st.code(str(row['uid']), language=None)
