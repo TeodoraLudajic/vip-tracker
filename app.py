@@ -570,8 +570,17 @@ if menu == "💢 Missing Players":
 
         last_seen = last_seen.head(50)
 
+        df_to_show = last_seen.reset_index()
+
         st.dataframe(
-            last_seen[["month", "Brand", "uid"]],
+            df_to_show[["month", "Brand", "uid"]],
+            column_config={
+                "uid": st.column_config.TextColumn(
+                    "UID",
+                    help="Klikni na dugme za kopiranje",
+                    copy_value=True
+                )
+            },
             use_container_width=True,
             hide_index=True
         )
