@@ -579,7 +579,7 @@ if menu == "💢 Missing Players":
             with c3: st.text(row['uid'])
             with c4:
 
-                if st.button(f"✓ Copy", key=f"btn_{i}"):
+                if st.button(f"Copy", key=f"btn_{i}"):
                     st.write(f'<script>navigator.clipboard.writeText("{row["uid"]}")</script>', unsafe_allow_html=True)
                     st.toast(f"Kopirano: {row['uid']}")
         
