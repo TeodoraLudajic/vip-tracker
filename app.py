@@ -569,21 +569,20 @@ if menu == "💢 Missing Players":
             ]
 
         last_seen = last_seen.head(50)
-        
         prikaz = last_seen.reset_index()
 
-        st.dataframe(
+        st.data_editor(
             prikaz[["month", "Brand", "uid"]],
+            column_config={
+                "uid": st.column_config.TextColumn(
+                    "UID",
+                    help="Samo klikni na UID i kopiraj ga!",
+                    disabled=True 
+                )
+            },
             use_container_width=True,
             hide_index=True
         )
-
-        st.markdown("---")
-        target_uid = st.text_input("Klikni ovde i unesi UID koji želiš da kopiraš:")
-        
-        if target_uid:
-            st.code(target_uid, language=None)
-            st.success(f"UID {target_uid} je spreman za kopiranje iz koda iznad!")
         
 # ==========================
 # PLAYER PAGE
